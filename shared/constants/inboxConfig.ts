@@ -1,11 +1,35 @@
+import {
+  Inbox,
+  Star,
+  Send,
+  FileText,
+  AlertTriangle,
+  Bookmark,
+  Trash2,
+} from "lucide-react";
+
 export const sidebarItems = [
-  { name: "Inbox" },
-  { name: "Starred" },
-  { name: "Sent" },
-  { name: "Draft" },
-  { name: "Spam" },
-  { name: "Important" },
-  { name: "Bin" },
+  {
+    id: "main",
+    section: "Main",
+    items: [
+      { title: "Inbox", href: "/dashboard/inbox?folder=Inbox", icon: Inbox },
+      { title: "Starred", href: "/dashboard/inbox?folder=Starred", icon: Star },
+      { title: "Sent", href: "/dashboard/inbox?folder=Sent", icon: Send },
+      { title: "Draft", href: "/dashboard/inbox?folder=Draft", icon: FileText },
+      {
+        title: "Spam",
+        href: "/dashboard/inbox?folder=Spam",
+        icon: AlertTriangle,
+      },
+      {
+        title: "Important",
+        href: "/dashboard/inbox?folder=Important",
+        icon: Bookmark,
+      },
+      { title: "Bin", href: "/dashboard/inbox?folder=Bin", icon: Trash2 },
+    ],
+  },
 ];
 
 export const defaultLabelColors = [

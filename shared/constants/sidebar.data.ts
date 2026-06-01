@@ -1,4 +1,4 @@
-import {SidebarItem} from "../types/sidebar";
+import { SidebarItem } from "../types/sidebar";
 import {
   LayoutDashboard,
   Package,

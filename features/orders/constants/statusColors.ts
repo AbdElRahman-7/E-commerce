@@ -1,5 +1,4 @@
-import { StatusColors } from "../types/colors.types";
-export const statusColors :StatusColors = {
+export const statusColors  = {
   Completed: {
     bg: "#D1FAE5",
     color: "#065F46",

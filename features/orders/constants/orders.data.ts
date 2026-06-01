@@ -1,6 +1,5 @@
-import { OrderType } from "../types/order.types";
 
-export const orders: OrderType[] = [
+export const orders = [
   {
     id: "00001",
     name: "Christine Brooks",

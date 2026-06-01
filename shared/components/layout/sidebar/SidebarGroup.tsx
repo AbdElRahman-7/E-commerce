@@ -1,4 +1,4 @@
-import { sidebarItems } from "@/shared/constants/menu.config";
+import { sidebarItems } from "../../../constants/inboxConfig";
 import { Box, Typography } from "@mui/material";
 import SidebarItem from "./SidebarItem";
 
@@ -23,7 +23,7 @@ const SidebarGroup = () => {
             {section.section}
           </Typography>
 
-          <SidebarItem />
+          <SidebarItem sectionId={section.id} />
         </Box>
       ))}
     </Box>
