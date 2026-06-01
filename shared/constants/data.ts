@@ -19,8 +19,8 @@ export const slides = [
     date: "November 5-15",
     bg: "#00A76F",
   },
-]; 
- export const deals = [
+];
+export const deals = [
   {
     product: "Apple Watch",
     location: "6096 Marjolaine Landing",
@@ -32,4 +32,3 @@ export const slides = [
       "https://images.unsplash.com/photo-1546868871-7041f2a55e12?q=80&w=200",
   },
 ];
- 

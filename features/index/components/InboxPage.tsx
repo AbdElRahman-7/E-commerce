@@ -56,6 +56,9 @@ const getLabelColors = (
   return colorMap[found?.color ?? ""] ?? { bg: "#F3F4F6", text: "#374151" };
 };
 
+// Flatten all items from all sidebar sections into a single array
+const allFolderItems = sidebarItems.flatMap((group) => group.items);
+
 export default function InboxPage() {
   const [emails, setEmails] = useState(initialEmails);
   const [labels, setLabels] = useState(initialLabels);
@@ -164,8 +167,8 @@ export default function InboxPage() {
     setPage(1);
   };
 
-  const changeFolder = (name: string) => {
-    setActiveFolder(name);
+  const changeFolder = (title: string) => {
+    setActiveFolder(title);
     setActiveLabels(new Set());
     setPage(1);
   };
@@ -217,34 +220,34 @@ export default function InboxPage() {
         <Typography sx={{ fontWeight: 700, mb: 2 }}>My Email</Typography>
 
         <List disablePadding>
-          {sidebarItems.map((item) => (
+          {allFolderItems.map((item) => (
             <ListItemButton
-              key={item.name}
-              onClick={() => changeFolder(item.name)}
+              key={item.title}
+              onClick={() => changeFolder(item.title)}
               sx={{
                 borderRadius: 2,
                 mb: 0.5,
                 backgroundColor:
-                  activeFolder === item.name && activeLabels.size === 0
+                  activeFolder === item.title && activeLabels.size === 0
                     ? "#EEF2FF"
                     : "transparent",
                 "&:hover": { backgroundColor: "#F3F4F6" },
               }}
             >
-              <ListItemText primary={item.name} />
+              <ListItemText primary={item.title} />
               <Chip
-                label={folderCount(item.name)}
+                label={folderCount(item.title)}
                 size="small"
                 sx={{
                   height: 20,
                   fontSize: 11,
                   fontWeight: 600,
                   backgroundColor:
-                    activeFolder === item.name && activeLabels.size === 0
+                    activeFolder === item.title && activeLabels.size === 0
                       ? "#C7D2FE"
                       : "#F3F4F6",
                   color:
-                    activeFolder === item.name && activeLabels.size === 0
+                    activeFolder === item.title && activeLabels.size === 0
                       ? "#3730A3"
                       : "#6B7280",
                 }}
