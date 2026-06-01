@@ -2,12 +2,6 @@
 import { useState } from "react";
 import { SchedulerEvent } from "@mui/x-scheduler/models";
 import { EventCalendar } from "@mui/x-scheduler/event-calendar";
-import {
-  initialEvents,
-  defaultVisibleDate,
-  resources,
-} from "../constants/personal-agenda";
-
 
 export default function Calendar() {
   const [events, setEvents] = useState<SchedulerEvent[]>(initialEvents);
