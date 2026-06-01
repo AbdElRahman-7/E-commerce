@@ -1,0 +1,47 @@
+export const plans = [
+  {
+    id: 1,
+    name: "Basic",
+    price: 14.99,
+    featured: false,
+    features: [
+      "Free Setup",
+      "Bandwidth Limit 10 GB",
+      "20 User Connection",
+      "Analytics Report",
+      "Public API Access",
+      "Plugins Integration",
+      "Custom Content Management",
+    ],
+  },
+  {
+    id: 2,
+    name: "Standard",
+    price: 49.99,
+    featured: false,
+    features: [
+      "Free Setup",
+      "Bandwidth Limit 10 GB",
+      "20 User Connection",
+      "Analytics Report",
+      "Public API Access",
+      "Plugins Integration",
+      "Custom Content Management",
+    ],
+  },
+  {
+    id: 3,
+    name: "Premium",
+    price: 89.99,
+    featured: true,
+    features: [
+      "Free Setup",
+      "Bandwidth Limit 10 GB",
+      "20 User Connection",
+      "Analytics Report",
+      "Public API Access",
+      "Plugins Integration",
+      "Custom Content Management",
+    ],
+  },
+];

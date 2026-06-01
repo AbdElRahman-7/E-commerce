@@ -1,0 +1,58 @@
+export const members = [
+  {
+    id: 1,
+    name: "Jason Price",
+    role: "Admin",
+    email: "jason@example.com",
+    image: "https://i.pravatar.cc/150?img=1",
+  },
+  {
+    id: 2,
+    name: "Julkee Siaou",
+    role: "CEO",
+    email: "julkee@example.com",
+    image: "https://i.pravatar.cc/150?img=2",
+  },
+  {
+    id: 3,
+    name: "Harriet King",
+    role: "CTO",
+    email: "harriet@example.com",
+    image: "https://i.pravatar.cc/150?img=3",
+  },
+  {
+    id: 4,
+    name: "Lenora Benson",
+    role: "HR",
+    email: "lenora@example.com",
+    image: "https://i.pravatar.cc/150?img=4",
+  },
+  {
+    id: 5,
+    name: "Olivia Reese",
+    role: "Strategist",
+    email: "olivia@example.com",
+    image: "https://i.pravatar.cc/150?img=5",
+  },
+  {
+    id: 6,
+    name: "Bertha Valdez",
+    role: "CEO",
+    email: "bertha@example.com",
+    image: "https://i.pravatar.cc/150?img=6",
+  },
+  {
+    id: 7,
+    name: "Harriet Payne",
+    role: "Digital Marketer",
+    email: "harriet@example.com",
+    image: "https://i.pravatar.cc/150?img=7",
+  },
+  {
+    id: 8,
+    name: "George Bryant",
+    role: "Social Media",
+    email: "george@example.com",
+    image: "https://i.pravatar.cc/150?img=8",
+  },
+];
