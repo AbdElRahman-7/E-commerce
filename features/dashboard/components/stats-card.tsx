@@ -11,7 +11,6 @@ type StatsCardProps = {
   isPositive?: boolean;
 };
 
-
 export default function StatsCard({
   title,
   value,
@@ -24,7 +23,7 @@ export default function StatsCard({
     <Box
       sx={{
         p: 3,
-        borderRadius: 4,
+        borderRadius: 1,
         backgroundColor: "#fff",
         boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
       }}

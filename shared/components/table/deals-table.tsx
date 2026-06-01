@@ -13,15 +13,19 @@ import {
   Chip,
 } from "@mui/material";
 import { deals } from "../../constants/data";
+import MonthDropdown from "../MonthDropdown";
+import { useState } from "react";
 
 export default function DealsTable() {
+  const [month, setMonth] = useState("October");
+
   return (
     <Box
       sx={{
         mt: 4,
         p: 3,
         backgroundColor: "#fff",
-        borderRadius: 4,
+        borderRadius: 1,
         boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
       }}
     >
@@ -43,18 +47,7 @@ export default function DealsTable() {
           Deals Details
         </Typography>
 
-        <Box
-          sx={{
-            px: 2,
-            py: 1,
-            border: "1px solid #E5E7EB",
-            borderRadius: 2,
-            fontSize: 14,
-            color: "#6B7280",
-          }}
-        >
-          October
-        </Box>
+        <MonthDropdown value={month} onChange={setMonth} />
       </Box>
 
       {/* Table */}
