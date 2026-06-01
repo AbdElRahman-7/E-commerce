@@ -1,0 +1,15 @@
+export const data = [
+  { name: "", sales: 20 },
+  { name: "Jan", sales: 48 },
+  { name: "Feb", sales: 30 },
+  { name: "Mar", sales: 85 },
+  { name: "Apr", sales: 52 },
+  { name: "May", sales: 88 },
+  { name: "Jun", sales: 25 },
+  { name: "Jul", sales: 48 },
+  { name: "Aug", sales: 72 },
+  { name: "Sep", sales: 55 },
+  { name: "Oct", sales: 42 },
+  { name: "Nov", sales: 56 },
+  { name: "Dec", sales: 30 },
+];

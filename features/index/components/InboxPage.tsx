@@ -56,7 +56,6 @@ const getLabelColors = (
   return colorMap[found?.color ?? ""] ?? { bg: "#F3F4F6", text: "#374151" };
 };
 
-// Flatten all items from all sidebar sections into a single array
 const allFolderItems = sidebarItems.flatMap((group) => group.items);
 
 export default function InboxPage() {
@@ -70,33 +69,30 @@ export default function InboxPage() {
   const [newLabelColor, setNewLabelColor] = useState(defaultLabelColors[0]);
   const [page, setPage] = useState(1);
 
-  // ── counts ───────────────────────────────────────────────────────────────
   const folderCount = (folder: string) => {
-    if (folder === "Starred") return emails.filter((e) => e.starred).length;
-    return emails.filter((e) => e.folder === folder).length;
+    if (folder === "Starred") return emails.filter((email) => email.starred).length;
+    return emails.filter((email) => email.folder === folder).length;
   };
 
   const labelCount = (labelName: string) =>
-    emails.filter((e) => e.label === labelName).length;
+    emails.filter((email) => email.label === labelName).length;
 
-  // ── filter ───────────────────────────────────────────────────────────────
   const filteredEmails = useMemo(() => {
-    return emails.filter((e) => {
+    return emails.filter((email) => {
       const matchesSearch =
         searchQuery === "" ||
-        e.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        e.message.toLowerCase().includes(searchQuery.toLowerCase());
+        email.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        email.message.toLowerCase().includes(searchQuery.toLowerCase());
 
       const matchesFolder =
-        activeFolder === "Starred" ? e.starred : e.folder === activeFolder;
+        activeFolder === "Starred" ? email.starred : email.folder === activeFolder;
 
-      const matchesLabel = activeLabels.size === 0 || activeLabels.has(e.label);
+      const matchesLabel = activeLabels.size === 0 || activeLabels.has(email.label);
 
       return matchesSearch && matchesFolder && matchesLabel;
     });
   }, [emails, activeFolder, activeLabels, searchQuery]);
 
-  // ── pagination ────────────────────────────────────────────────────────────
   const totalPages = Math.max(
     1,
     Math.ceil(filteredEmails.length / ROWS_PER_PAGE),
@@ -107,48 +103,45 @@ export default function InboxPage() {
     safePage * ROWS_PER_PAGE,
   );
 
-  // ── select helpers ────────────────────────────────────────────────────────
-  const checkedIds = new Set(emails.filter((e) => e.checked).map((e) => e.id));
+  const checkedIds = new Set(emails.filter((email) => email.checked).map((email) => email.id));
   const anyChecked = checkedIds.size > 0;
   const allPageChecked =
-    pagedEmails.length > 0 && pagedEmails.every((e) => e.checked);
-  const somePageChecked = pagedEmails.some((e) => e.checked);
+    pagedEmails.length > 0 && pagedEmails.every((email) => email.checked);
+  const somePageChecked = pagedEmails.some((email) => email.checked);
 
-  // ── actions ───────────────────────────────────────────────────────────────
   const toggleCheck = (id: number) =>
     setEmails((prev) =>
-      prev.map((e) => (e.id === id ? { ...e, checked: !e.checked } : e)),
+      prev.map((email) => (email.id === id ? { ...email, checked: !email.checked } : email)),
     );
 
   const toggleSelectAll = () => {
-    const pageIds = new Set(pagedEmails.map((e) => e.id));
+    const pageIds = new Set(pagedEmails.map((email) => email.id));
     const newVal = !allPageChecked;
     setEmails((prev) =>
-      prev.map((e) => (pageIds.has(e.id) ? { ...e, checked: newVal } : e)),
+      prev.map((email) => (pageIds.has(email.id) ? { ...email, checked: newVal } : email)),
     );
   };
 
   const toggleStar = (id: number) =>
     setEmails((prev) =>
-      prev.map((e) => (e.id === id ? { ...e, starred: !e.starred } : e)),
+      prev.map((email) => (email.id === id ? { ...email, starred: !email.starred } : email)),
     );
 
   const deleteChecked = () => {
-    setEmails((prev) => prev.filter((e) => !e.checked));
+    setEmails((prev) => prev.filter((email) => !email.checked));
     setPage(1);
   };
 
   const markImportant = () =>
     setEmails((prev) =>
-      prev.map((e) =>
-        e.checked ? { ...e, label: "Important", checked: false } : e,
+      prev.map((email) =>
+        email.checked ? { ...email, label: "Important", checked: false } : email,
       ),
     );
 
   const markRead = () =>
-    setEmails((prev) => prev.map((e) => ({ ...e, checked: false })));
+    setEmails((prev) => prev.map((email) => ({ ...email, checked: false })));
 
-  // ── label filter toggle (multi) ───────────────────────────────────────────
   const toggleLabelFilter = (labelName: string) => {
     setActiveLabels((prev) => {
       const next = new Set(prev);
@@ -173,7 +166,6 @@ export default function InboxPage() {
     setPage(1);
   };
 
-  // ── add label ─────────────────────────────────────────────────────────────
   const handleAddLabel = () => {
     if (!newLabelName.trim()) return;
     setLabels((prev) => [
@@ -193,7 +185,6 @@ export default function InboxPage() {
         flexDirection: { xs: "column", lg: "row" },
       }}
     >
-      {/* ── Sidebar ──────────────────────────────────────────────────────── */}
       <Paper
         sx={{
           width: { xs: "100%", lg: 260 },
@@ -258,7 +249,6 @@ export default function InboxPage() {
 
         <Divider sx={{ my: 3 }} />
 
-        {/* Label header */}
         <Box
           sx={{
             display: "flex",
@@ -295,7 +285,6 @@ export default function InboxPage() {
           </Box>
         </Box>
 
-        {/* Active label summary chips */}
         {activeLabels.size > 0 && (
           <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5, mb: 1 }}>
             {Array.from(activeLabels).map((name) => {
@@ -381,7 +370,6 @@ export default function InboxPage() {
           boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
         }}
       >
-        {/* Topbar */}
         <Box
           sx={{
             p: 2,
@@ -445,7 +433,6 @@ export default function InboxPage() {
 
         <Divider />
 
-        {/* Select-all row */}
         <Box
           sx={{
             display: "flex",
@@ -469,7 +456,6 @@ export default function InboxPage() {
           )}
         </Box>
 
-        {/* Email rows */}
         {pagedEmails.length === 0 ? (
           <Box sx={{ p: 6, textAlign: "center" }}>
             <Typography sx={{ color: "#9CA3AF" }}>No emails found</Typography>
@@ -531,7 +517,6 @@ export default function InboxPage() {
           })
         )}
 
-        {/* Pagination footer */}
         <Box
           sx={{
             p: 2,
@@ -592,7 +577,6 @@ export default function InboxPage() {
         </Box>
       </Paper>
 
-      {/* ── Add Label Dialog ─────────────────────────────────────────────── */}
       <Dialog
         open={addLabelOpen}
         onClose={() => setAddLabelOpen(false)}
