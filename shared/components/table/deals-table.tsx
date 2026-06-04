@@ -97,8 +97,8 @@ export default function DealsTable() {
                   <Chip
                     label={deal.status}
                     sx={{
-                      backgroundColor: "#D1FAE5",
-                      color: "#059669",
+                      backgroundColor: "#00b69b",
+                      color: "#ffffff",
                       fontWeight: 600,
                     }}
                   />

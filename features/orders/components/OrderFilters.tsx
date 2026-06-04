@@ -9,6 +9,8 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Button from "@mui/material/Button";
+import { Box, Paper } from "@mui/material";
+import { TurntableIcon } from "lucide-react";
 
 type Props = {
   statusFilter: string | null;
@@ -34,40 +36,40 @@ export default function OrderFilters({
   const types = [...new Set(orders.map((order) => order.type))];
 
   return (
-    <Stack direction="row" spacing={2} sx={{ mb: 2, alignItems: "center" }}>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker
-          label="Date"
-          value={dateFilter ? dayjs(dateFilter) : null}
-          onChange={(value) =>
-            setDateFilter(value ? dayjs(value).format("YYYY-MM-DD") : null)
-          }
-          slotProps={{ textField: { size: "small", sx: { width: 200 } } }}
-        />
-      </LocalizationProvider>
+    <Paper
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        border: "1px solid #E5E7EB",
+        borderRadius: "16px",
+        overflow: "hidden",
+        height: 80,
+        width: "100%",
+      }}
+    >
+      <Box sx={{ width: 80, borderRight: "1px solid #E5E7EB" }}>
+  <TurntableIcon />
+</Box>
 
-      <Autocomplete
-        options={statuses}
-        value={statusFilter}
-        onChange={(_, value) => setStatusFilter(value)}
-        sx={{ width: 250 }}
-        renderInput={(params) => (
-          <TextField {...params} label="Status" size="small" />
-        )}
-      />
+<Box sx={{ px: 4, borderRight: "1px solid #E5E7EB" }}>
+  Filter By
+</Box>
 
-      <Autocomplete
-        options={types}
-        value={typeFilter}
-        onChange={(_, value) => setTypeFilter(value)}
-        sx={{ width: 250 }}
-        renderInput={(params) => (
-          <TextField {...params} label="Type" size="small" />
-        )}
-      />
-      <Button variant="outlined" onClick={resetFilters}>
-        Reset
-      </Button>
-    </Stack>
+<Box sx={{ px: 3, borderRight: "1px solid #E5E7EB" }}>
+  Date
+</Box>
+
+<Box sx={{ px: 3, borderRight: "1px solid #E5E7EB" }}>
+  Order Type
+</Box>
+
+<Box sx={{ px: 3, borderRight: "1px solid #E5E7EB" }}>
+  Order Status
+</Box>
+
+<Box sx={{ px: 4 }}>
+  Reset Filter
+</Box>
+    </Paper>
   );
 }

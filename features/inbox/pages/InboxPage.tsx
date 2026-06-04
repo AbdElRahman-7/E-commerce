@@ -17,8 +17,10 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  ListItemIcon
 } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
+
 import {
   Star,
   Search,
@@ -35,7 +37,7 @@ import {
   defaultLabelColors,
   initialLabels,
   initialEmails,
-} from "@/shared/constants/inboxConfig";
+} from "@/features/inbox/constant/inboxConfig";
 
 const ROWS_PER_PAGE = 5;
 
@@ -188,7 +190,7 @@ export default function InboxPage() {
       <Paper
         sx={{
           width: { xs: "100%", lg: 260 },
-          borderRadius: 4,
+          borderRadius: 1,
           p: 2,
           height: "fit-content",
           boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
@@ -199,7 +201,7 @@ export default function InboxPage() {
           variant="contained"
           sx={{
             mb: 4,
-            borderRadius: 3,
+            borderRadius: 1,
             py: 1.2,
             textTransform: "none",
             fontWeight: 600,
@@ -210,42 +212,59 @@ export default function InboxPage() {
 
         <Typography sx={{ fontWeight: 700, mb: 2 }}>My Email</Typography>
 
-        <List disablePadding>
-          {allFolderItems.map((item) => (
-            <ListItemButton
-              key={item.title}
-              onClick={() => changeFolder(item.title)}
-              sx={{
-                borderRadius: 2,
-                mb: 0.5,
-                backgroundColor:
-                  activeFolder === item.title && activeLabels.size === 0
-                    ? "#EEF2FF"
-                    : "transparent",
-                "&:hover": { backgroundColor: "#F3F4F6" },
-              }}
-            >
-              <ListItemText primary={item.title} />
-              <Chip
-                label={folderCount(item.title)}
-                size="small"
-                sx={{
-                  height: 20,
-                  fontSize: 11,
-                  fontWeight: 600,
-                  backgroundColor:
-                    activeFolder === item.title && activeLabels.size === 0
-                      ? "#C7D2FE"
-                      : "#F3F4F6",
-                  color:
-                    activeFolder === item.title && activeLabels.size === 0
-                      ? "#3730A3"
-                      : "#6B7280",
-                }}
-              />
-            </ListItemButton>
-          ))}
-        </List>
+          <List disablePadding>
+  {allFolderItems.map((item) => {
+    const Icon = item.icon;
+
+    return (
+      <ListItemButton
+        key={item.title}
+        onClick={() => changeFolder(item.title)}
+        sx={{
+          borderRadius: 1,
+          mb: 0.5,
+          backgroundColor:
+            activeFolder === item.title && activeLabels.size === 0
+              ? "#EEF2FF"
+              : "transparent",
+          "&:hover": { backgroundColor: "#F3F4F6" },
+        }}
+      >
+        <ListItemIcon
+          sx={{
+            minWidth: 36,
+            color:
+              activeFolder === item.title && activeLabels.size === 0
+                ? "#3730A3"
+                : "#6B7280",
+          }}
+        >
+          <Icon fontSize="small" />
+        </ListItemIcon>
+
+        <ListItemText primary={item.title} />
+
+        <Chip
+          label={folderCount(item.title)}
+          size="small"
+          sx={{
+            height: 20,
+            fontSize: 11,
+            fontWeight: 600,
+            backgroundColor:
+              activeFolder === item.title && activeLabels.size === 0
+                ? "#C7D2FE"
+                : "#F3F4F6",
+            color:
+              activeFolder === item.title && activeLabels.size === 0
+                ? "#3730A3"
+                : "#6B7280",
+          }}
+        />
+      </ListItemButton>
+    );
+  })}
+</List>
 
         <Divider sx={{ my: 3 }} />
 
@@ -316,7 +335,7 @@ export default function InboxPage() {
                 key={label.name}
                 onClick={() => toggleLabelFilter(label.name)}
                 sx={{
-                  borderRadius: 2,
+                  borderRadius: 1,
                   mb: 0.5,
                   backgroundColor: isChecked ? "#EEF2FF" : "transparent",
                   "&:hover": { backgroundColor: "#F3F4F6" },
@@ -365,7 +384,7 @@ export default function InboxPage() {
       <Paper
         sx={{
           flex: 1,
-          borderRadius: 4,
+          borderRadius: 1,
           overflow: "hidden",
           boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
         }}
@@ -391,7 +410,7 @@ export default function InboxPage() {
             sx={{
               width: { xs: "100%", md: 300 },
               "& .MuiOutlinedInput-root": {
-                borderRadius: 10,
+                borderRadius: 1,
                 backgroundColor: "#F9FAFB",
               },
             }}
@@ -550,7 +569,7 @@ export default function InboxPage() {
                 sx={{
                   width: 30,
                   height: 30,
-                  borderRadius: 1.5,
+                  borderRadius: 1,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -581,7 +600,7 @@ export default function InboxPage() {
         open={addLabelOpen}
         onClose={() => setAddLabelOpen(false)}
         slotProps={{
-          paper: { sx: { borderRadius: 3, p: 1, minWidth: 320 } },
+          paper: { sx: { borderRadius: 1, p: 1, minWidth: 320 } },
         }}
       >
         <DialogTitle sx={{ fontWeight: 700, fontSize: 16 }}>
@@ -609,7 +628,7 @@ export default function InboxPage() {
                 sx={{
                   width: 30,
                   height: 30,
-                  borderRadius: "50%",
+                  borderRadius: 1,
                   backgroundColor: color,
                   cursor: "pointer",
                   outline:
@@ -634,7 +653,7 @@ export default function InboxPage() {
             variant="contained"
             onClick={handleAddLabel}
             disabled={!newLabelName.trim()}
-            sx={{ textTransform: "none", borderRadius: 2 }}
+            sx={{ textTransform: "none", borderRadius: 1 }}
           >
             Add Label
           </Button>

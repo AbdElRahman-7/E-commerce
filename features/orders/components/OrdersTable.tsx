@@ -10,10 +10,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { orders } from "../constants/orders.data";
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
+const StyledTableCell = styled(TableCell)(({  }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
+    backgroundColor: "#e4e2e2",
+    color: "#110f0f",
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -22,7 +22,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
+    backgroundColor: ""
   },
   "&:last-child td, &:last-child th": {
     border: 0,
@@ -51,6 +51,7 @@ export default function OrdersTable({ statusFilter, typeFilter, dateFilter }: Or
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
+        
         <TableHead>
           <TableRow>
             {headers.map((header, index) => (
@@ -58,8 +59,9 @@ export default function OrdersTable({ statusFilter, typeFilter, dateFilter }: Or
                 {header}
               </StyledTableCell>
             ))}
-          </TableRow>
+          </TableRow>  
         </TableHead>
+
         <TableBody>
           {filteredRows.map((row) => (
             <StyledTableRow key={row.id}>
@@ -69,11 +71,13 @@ export default function OrdersTable({ statusFilter, typeFilter, dateFilter }: Or
                   align={column === "id" ? "left" : "right"}
                 >
                   {row[column]}
+                  
                 </StyledTableCell>
               ))}
             </StyledTableRow>
           ))}
         </TableBody>
+
       </Table>
     </TableContainer>
   );
