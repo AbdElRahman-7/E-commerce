@@ -43,16 +43,14 @@ export default function InboxTable() {
   return (
     <Paper
       sx={{
-        borderRadius: 4,
+        borderRadius: 1,
         overflow: "hidden",
       }}
     >
-      {/* Search */}
       <Box sx={{ p: 2 }}>
         <TextField placeholder="Search mail" size="small" fullWidth />
       </Box>
 
-      {/* Table */}
       <TableContainer>
         <Table>
           <TableBody>

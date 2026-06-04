@@ -1,4 +1,4 @@
-import InboxPage from "@/features/index/components/InboxPage";
+import InboxPage from  "@/features/inbox/pages/InboxPage";
 
 export default function Page() {
 

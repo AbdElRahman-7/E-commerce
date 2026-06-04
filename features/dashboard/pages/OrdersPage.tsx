@@ -28,7 +28,8 @@ const OrdersPage = () => {
             growth={item.growth}
             description={item.description}
             isPositive={item.isPositive}
-            icon={<item.icon size={20} />}
+            icon={<item.icon size={24} />}
+            bgColor={item.bgColor}
           />
         ))}
       </Box>

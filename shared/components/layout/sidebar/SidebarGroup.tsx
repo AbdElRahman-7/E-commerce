@@ -1,4 +1,4 @@
-import { sidebarItems } from "../../../constants/inboxConfig";
+import { sidebarItems } from "../../../../features/inbox/constant/inboxConfig";
 import { Box, Typography } from "@mui/material";
 import SidebarItem from "./SidebarItem";
 

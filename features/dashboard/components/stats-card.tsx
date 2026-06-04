@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import {dashboardStats} from "../constants/dashboard-stats";
 
 import { TrendingUp, TrendingDown } from "lucide-react";
 
@@ -9,6 +10,7 @@ type StatsCardProps = {
   description: string;
   icon: React.ReactNode;
   isPositive?: boolean;
+  bgColor?: string;
 };
 
 export default function StatsCard({
@@ -18,6 +20,7 @@ export default function StatsCard({
   description,
   icon,
   isPositive,
+  bgColor 
 }: StatsCardProps) {
   return (
     <Box
@@ -25,7 +28,7 @@ export default function StatsCard({
         p: 3,
         borderRadius: 1,
         backgroundColor: "#fff",
-        boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
+        boxShadow: "0 3px 10px rgba(0,0,0,0.05)",
       }}
     >
       <Box
@@ -45,7 +48,19 @@ export default function StatsCard({
           {title}
         </Typography>
 
-        {icon}
+<Box
+  sx={{
+    width: 50,
+    height: 50,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: bgColor,
+    borderRadius: 1,
+  }}
+>
+  {icon}
+</Box>
       </Box>
 
       <Typography

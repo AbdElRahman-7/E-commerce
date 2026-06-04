@@ -5,7 +5,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { sidebarItems } from "../../../constants/inboxConfig";
+import { sidebarItems } from "../../../../features/inbox/constant/inboxConfig";
 
 interface SidebarItemProps {
   sectionId: string;
