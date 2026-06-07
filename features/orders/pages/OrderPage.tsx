@@ -6,13 +6,13 @@ import OrdersTable from "../components/OrdersTable";
 import { Box } from "@mui/material";
 
 export default function OrdersPage() {
-  const [statusFilter, setStatusFilter] = useState<string | null>(null);
-  const [typeFilter, setTypeFilter] = useState<string | null>(null);
+  const [statusFilter, setStatusFilter] = useState<string[]>([]);
+  const [typeFilter, setTypeFilter] = useState<string[]>([]);
   const [dateFilter, setDateFilter] = useState<string | null>(null);
   
 const resetFilters = () => {
-  setStatusFilter(null);
-  setTypeFilter(null);
+  setStatusFilter([]);
+  setTypeFilter([]);
   setDateFilter(null);
 };
   return (

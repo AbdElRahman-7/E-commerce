@@ -17,7 +17,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  ListItemIcon
+  ListItemIcon,
 } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 
@@ -31,24 +31,17 @@ import {
   ChevronRight,
   Plus,
 } from "lucide-react";
-import { useState, useMemo } from "react";
 import {
   sidebarItems,
   defaultLabelColors,
-  initialLabels,
-  initialEmails,
 } from "@/features/inbox/constant/inboxConfig";
+import {
+  ROWS_PER_PAGE,
+  colorMap,
+} from "@/features/inbox/constant/inbox.constants";
+import { useInbox } from "@/features/inbox/hooks/inbox";
 
-const ROWS_PER_PAGE = 5;
-
-const colorMap: Record<string, { bg: string; text: string }> = {
-  "#4ADE80": { bg: "#DCFCE7", text: "#16A34A" },
-  "#60A5FA": { bg: "#DBEAFE", text: "#2563EB" },
-  "#FB923C": { bg: "#FFEDD5", text: "#EA580C" },
-  "#C084FC": { bg: "#F3E8FF", text: "#9333EA" },
-  "#F87171": { bg: "#FEE2E2", text: "#DC2626" },
-  "#FBBF24": { bg: "#FEF3C7", text: "#D97706" },
-};
+const allFolderItems = sidebarItems.flatMap((group) => group.items);
 
 const getLabelColors = (
   label: string,
@@ -58,126 +51,42 @@ const getLabelColors = (
   return colorMap[found?.color ?? ""] ?? { bg: "#F3F4F6", text: "#374151" };
 };
 
-const allFolderItems = sidebarItems.flatMap((group) => group.items);
-
 export default function InboxPage() {
-  const [emails, setEmails] = useState(initialEmails);
-  const [labels, setLabels] = useState(initialLabels);
-  const [activeFolder, setActiveFolder] = useState("Inbox");
-  const [activeLabels, setActiveLabels] = useState<Set<string>>(new Set());
-  const [searchQuery, setSearchQuery] = useState("");
-  const [addLabelOpen, setAddLabelOpen] = useState(false);
-  const [newLabelName, setNewLabelName] = useState("");
-  const [newLabelColor, setNewLabelColor] = useState(defaultLabelColors[0]);
-  const [page, setPage] = useState(1);
-
-  const folderCount = (folder: string) => {
-    if (folder === "Starred") return emails.filter((email) => email.starred).length;
-    return emails.filter((email) => email.folder === folder).length;
-  };
-
-  const labelCount = (labelName: string) =>
-    emails.filter((email) => email.label === labelName).length;
-
-  const filteredEmails = useMemo(() => {
-    return emails.filter((email) => {
-      const matchesSearch =
-        searchQuery === "" ||
-        email.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        email.message.toLowerCase().includes(searchQuery.toLowerCase());
-
-      const matchesFolder =
-        activeFolder === "Starred" ? email.starred : email.folder === activeFolder;
-
-      const matchesLabel = activeLabels.size === 0 || activeLabels.has(email.label);
-
-      return matchesSearch && matchesFolder && matchesLabel;
-    });
-  }, [emails, activeFolder, activeLabels, searchQuery]);
-
-  const totalPages = Math.max(
-    1,
-    Math.ceil(filteredEmails.length / ROWS_PER_PAGE),
-  );
-  const safePage = Math.min(page, totalPages);
-  const pagedEmails = filteredEmails.slice(
-    (safePage - 1) * ROWS_PER_PAGE,
-    safePage * ROWS_PER_PAGE,
-  );
-
-  const checkedIds = new Set(emails.filter((email) => email.checked).map((email) => email.id));
-  const anyChecked = checkedIds.size > 0;
-  const allPageChecked =
-    pagedEmails.length > 0 && pagedEmails.every((email) => email.checked);
-  const somePageChecked = pagedEmails.some((email) => email.checked);
-
-  const toggleCheck = (id: number) =>
-    setEmails((prev) =>
-      prev.map((email) => (email.id === id ? { ...email, checked: !email.checked } : email)),
-    );
-
-  const toggleSelectAll = () => {
-    const pageIds = new Set(pagedEmails.map((email) => email.id));
-    const newVal = !allPageChecked;
-    setEmails((prev) =>
-      prev.map((email) => (pageIds.has(email.id) ? { ...email, checked: newVal } : email)),
-    );
-  };
-
-  const toggleStar = (id: number) =>
-    setEmails((prev) =>
-      prev.map((email) => (email.id === id ? { ...email, starred: !email.starred } : email)),
-    );
-
-  const deleteChecked = () => {
-    setEmails((prev) => prev.filter((email) => !email.checked));
-    setPage(1);
-  };
-
-  const markImportant = () =>
-    setEmails((prev) =>
-      prev.map((email) =>
-        email.checked ? { ...email, label: "Important", checked: false } : email,
-      ),
-    );
-
-  const markRead = () =>
-    setEmails((prev) => prev.map((email) => ({ ...email, checked: false })));
-
-  const toggleLabelFilter = (labelName: string) => {
-    setActiveLabels((prev) => {
-      const next = new Set(prev);
-      if (next.has(labelName)) {
-        next.delete(labelName);
-      } else {
-        next.add(labelName);
-      }
-      return next;
-    });
-    setPage(1);
-  };
-
-  const clearLabelFilters = () => {
-    setActiveLabels(new Set());
-    setPage(1);
-  };
-
-  const changeFolder = (title: string) => {
-    setActiveFolder(title);
-    setActiveLabels(new Set());
-    setPage(1);
-  };
-
-  const handleAddLabel = () => {
-    if (!newLabelName.trim()) return;
-    setLabels((prev) => [
-      ...prev,
-      { name: newLabelName.trim(), color: newLabelColor },
-    ]);
-    setNewLabelName("");
-    setNewLabelColor(defaultLabelColors[0]);
-    setAddLabelOpen(false);
-  };
+  const {
+    labels,
+    activeFolder,
+    activeLabels,
+    searchQuery,
+    addLabelOpen,
+    newLabelName,
+    newLabelColor,
+    page,
+    filteredEmails,
+    pagedEmails,
+    totalPages,
+    safePage,
+    checkedIds,
+    anyChecked,
+    allPageChecked,
+    somePageChecked,
+    setSearchQuery,
+    setPage,
+    setAddLabelOpen,
+    setNewLabelName,
+    setNewLabelColor,
+    folderCount,
+    labelCount,
+    toggleCheck,
+    toggleSelectAll,
+    toggleStar,
+    deleteChecked,
+    markImportant,
+    markRead,
+    toggleLabelFilter,
+    clearLabelFilters,
+    changeFolder,
+    handleAddLabel,
+  } = useInbox();
 
   return (
     <Box
@@ -212,59 +121,59 @@ export default function InboxPage() {
 
         <Typography sx={{ fontWeight: 700, mb: 2 }}>My Email</Typography>
 
-          <List disablePadding>
-  {allFolderItems.map((item) => {
-    const Icon = item.icon;
+        <List disablePadding>
+          {allFolderItems.map((item) => {
+            const Icon = item.icon;
 
-    return (
-      <ListItemButton
-        key={item.title}
-        onClick={() => changeFolder(item.title)}
-        sx={{
-          borderRadius: 1,
-          mb: 0.5,
-          backgroundColor:
-            activeFolder === item.title && activeLabels.size === 0
-              ? "#EEF2FF"
-              : "transparent",
-          "&:hover": { backgroundColor: "#F3F4F6" },
-        }}
-      >
-        <ListItemIcon
-          sx={{
-            minWidth: 36,
-            color:
-              activeFolder === item.title && activeLabels.size === 0
-                ? "#3730A3"
-                : "#6B7280",
-          }}
-        >
-          <Icon fontSize="small" />
-        </ListItemIcon>
+            return (
+              <ListItemButton
+                key={item.title}
+                onClick={() => changeFolder(item.title)}
+                sx={{
+                  borderRadius: 1,
+                  mb: 0.5,
+                  backgroundColor:
+                    activeFolder === item.title && activeLabels.size === 0
+                      ? "#EEF2FF"
+                      : "transparent",
+                  "&:hover": { backgroundColor: "#F3F4F6" },
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 36,
+                    color:
+                      activeFolder === item.title && activeLabels.size === 0
+                        ? "#3730A3"
+                        : "#6B7280",
+                  }}
+                >
+                  <Icon fontSize="small" />
+                </ListItemIcon>
 
-        <ListItemText primary={item.title} />
+                <ListItemText primary={item.title} />
 
-        <Chip
-          label={folderCount(item.title)}
-          size="small"
-          sx={{
-            height: 20,
-            fontSize: 11,
-            fontWeight: 600,
-            backgroundColor:
-              activeFolder === item.title && activeLabels.size === 0
-                ? "#C7D2FE"
-                : "#F3F4F6",
-            color:
-              activeFolder === item.title && activeLabels.size === 0
-                ? "#3730A3"
-                : "#6B7280",
-          }}
-        />
-      </ListItemButton>
-    );
-  })}
-</List>
+                <Chip
+                  label={folderCount(item.title)}
+                  size="small"
+                  sx={{
+                    height: 20,
+                    fontSize: 11,
+                    fontWeight: 600,
+                    backgroundColor:
+                      activeFolder === item.title && activeLabels.size === 0
+                        ? "#C7D2FE"
+                        : "#F3F4F6",
+                    color:
+                      activeFolder === item.title && activeLabels.size === 0
+                        ? "#3730A3"
+                        : "#6B7280",
+                  }}
+                />
+              </ListItemButton>
+            );
+          })}
+        </List>
 
         <Divider sx={{ my: 3 }} />
 
@@ -521,6 +430,10 @@ export default function InboxPage() {
                     backgroundColor: lc.bg,
                     color: lc.text,
                     fontWeight: 500,
+                    fontSize: 15,
+                    height: 22,
+                    borderRadius: 0.5,
+                    textTransform: "capitalize",
                   }}
                 />
                 <Typography sx={{ fontSize: 14, color: "#4B5563" }} noWrap>
