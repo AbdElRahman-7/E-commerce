@@ -1,10 +1,16 @@
+"use client";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import { useRouter } from "next/navigation";
+import AddContactFom from "@/shared/components/form/AddContactForm";
 import ContactCard from "../components/ContactCard";
 import { contacts } from "../constants/contacts";
-
+import { useState } from "react";
 
 export default function ContactsPage() {
+  const router = useRouter();
+ 
+  const [showForm, setShowForm] = useState(false);
   return (
     <>
       <Box
@@ -15,13 +21,19 @@ export default function ContactsPage() {
           alignItems: "center",
         }}
       >
-        <Typography variant="h4" sx={{fontWeight:700}}>
+        <Typography variant="h4" sx={{ fontWeight: 700 }}>
           Contact
         </Typography>
 
-        <Button variant="contained" startIcon={<AddIcon />}>
+        
+        <Button
+          variant="contained"
+          startIcon={<AddIcon />}
+          onClick={() => router.push("/dashboard/contact/add")}
+        >
           Add New Contact
         </Button>
+        {showForm && <AddContactFom />}
       </Box>
 
       <Grid container spacing={3}>

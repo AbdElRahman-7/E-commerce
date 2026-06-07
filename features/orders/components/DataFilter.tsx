@@ -6,7 +6,7 @@ import { LocalizationProvider, StaticDatePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Button } from '@mui/material';
 import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const DataFilter = ({
   dateFilter,
@@ -20,10 +20,6 @@ const DataFilter = ({
     dateFilter ? dayjs(dateFilter) : null,
   );
 
-  useEffect(() => {
-    setTempDate(dateFilter ? dayjs(dateFilter) : null);
-  }, [dateFilter]);
-
   const dateLabel = dateFilter
     ? dayjs(dateFilter).format('MMM D, YYYY')
     : 'Date';
@@ -32,7 +28,14 @@ const DataFilter = ({
    <LocalizationProvider dateAdapter={AdapterDayjs}>
             <div style={{ position: "relative" }}>
               <div
-                onClick={() => setShowCalendar((prev) => !prev)}
+                onClick={() => {
+                  setShowCalendar((prev) => {
+                    const nextState = !prev;
+                    if (!nextState) return nextState;
+                    setTempDate(dateFilter ? dayjs(dateFilter) : null);
+                    return nextState;
+                  });
+                }}
                 style={{
                   display: "flex",
                   alignItems: "center",

@@ -3,10 +3,12 @@ import AddIcon from "@mui/icons-material/Add";
 import TeamCard from "../components/TeamCard";
 import { members } from "../constants/members";
 import { Box, Button, Grid, Typography } from "@mui/material";
-
-
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function TeamPage() {
+  const [showTeam, setShowTeam] = useState(false);
+  const route = useRouter();
   return (
     <Box>
       <Box
@@ -17,11 +19,15 @@ export default function TeamPage() {
           alignItems: "center",
         }}
       >
-        <Typography variant="h4" sx={{fontWeight:700}}>
+        <Typography variant="h4" sx={{ fontWeight: 700 }}>
           Team
         </Typography>
 
-        <Button variant="contained" startIcon={<AddIcon />}>
+        <Button
+          variant="contained"
+          startIcon={<AddIcon />}
+          onClick={() => route.push("/dashboard/team/add")}
+        >
           Add New Member
         </Button>
       </Box>
