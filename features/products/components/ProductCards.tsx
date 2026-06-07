@@ -168,6 +168,7 @@ export default function ProductCards() {
                 textTransform: "none",
                 fontWeight: 600,
                 boxShadow: "none",
+                width: "50%",
 
                 "&:hover": {
                   backgroundColor: "#E0E7FF",

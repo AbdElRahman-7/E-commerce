@@ -4,9 +4,11 @@ import { useState, useMemo } from "react";
 import {
   initialEmails,
   initialLabels,
-  defaultLabelColors,
   ROWS_PER_PAGE,
+  sidebarItems,
+  colorMap,
 } from "../constant/inbox.constants";
+import { defaultLabelColors } from "../constant/inboxConfig";
 
 export function useInbox() {
   const [emails, setEmails] = useState(initialEmails);
@@ -46,16 +48,17 @@ export function useInbox() {
     });
   }, [emails, activeFolder, activeLabels, searchQuery]);
 
-  const totalPages = Math.max(1, Math.ceil(filteredEmails.length / ROWS_PER_PAGE));
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredEmails.length / ROWS_PER_PAGE),
+  );
   const safePage = Math.min(page, totalPages);
   const pagedEmails = filteredEmails.slice(
     (safePage - 1) * ROWS_PER_PAGE,
-    safePage * ROWS_PER_PAGE
+    safePage * ROWS_PER_PAGE,
   );
 
-  const checkedIds = new Set(
-    emails.filter((e) => e.checked).map((e) => e.id)
-  );
+  const checkedIds = new Set(emails.filter((e) => e.checked).map((e) => e.id));
   const anyChecked = checkedIds.size > 0;
   const allPageChecked =
     pagedEmails.length > 0 && pagedEmails.every((e) => e.checked);
@@ -63,20 +66,20 @@ export function useInbox() {
 
   const toggleCheck = (id: number) =>
     setEmails((prev) =>
-      prev.map((e) => (e.id === id ? { ...e, checked: !e.checked } : e))
+      prev.map((e) => (e.id === id ? { ...e, checked: !e.checked } : e)),
     );
 
   const toggleSelectAll = () => {
     const pageIds = new Set(pagedEmails.map((e) => e.id));
     const newVal = !allPageChecked;
     setEmails((prev) =>
-      prev.map((e) => (pageIds.has(e.id) ? { ...e, checked: newVal } : e))
+      prev.map((e) => (pageIds.has(e.id) ? { ...e, checked: newVal } : e)),
     );
   };
 
   const toggleStar = (id: number) =>
     setEmails((prev) =>
-      prev.map((e) => (e.id === id ? { ...e, starred: !e.starred } : e))
+      prev.map((e) => (e.id === id ? { ...e, starred: !e.starred } : e)),
     );
 
   const deleteChecked = () => {
@@ -87,8 +90,8 @@ export function useInbox() {
   const markImportant = () =>
     setEmails((prev) =>
       prev.map((e) =>
-        e.checked ? { ...e, label: "Important", checked: false } : e
-      )
+        e.checked ? { ...e, label: "Important", checked: false } : e,
+      ),
     );
 
   const markRead = () =>

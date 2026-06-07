@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 
 import { orders } from "../constants/orders.data";
+import dayjs from "dayjs";
 
 export function useOrdersFilters() {
   const [selectedType, setSelectedType] = useState("");
@@ -16,6 +17,8 @@ export function useOrdersFilters() {
   const [activeDay, setActiveDay] = useState<number | null>(null);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [tempDate, setTempDate] = useState<dayjs.Dayjs | null>(null);
+  const [typeOpen, setTypeOpen] = useState(false);
 
   const filteredOrders = useMemo(() => {
     return orders.filter((order) => {
@@ -56,7 +59,10 @@ export function useOrdersFilters() {
 
     anchorEl,
     setAnchorEl,
-
+    tempDate,
+    setTempDate,
     resetFilters,
+    typeOpen,
+    setTypeOpen,
   };
 }

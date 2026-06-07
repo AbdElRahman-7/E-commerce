@@ -1,22 +1,16 @@
 "use client";
-
-import Autocomplete from "@mui/material/Autocomplete";
-import TextField from "@mui/material/TextField";
-import Stack from "@mui/material/Stack";
-import dayjs from "dayjs";
-import { orders } from "../constants/orders.data";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import Button from "@mui/material/Button";
-import { Box, Paper } from "@mui/material";
-import { TurntableIcon } from "lucide-react";
+import { Paper } from "@mui/material";
+import { Filter } from "lucide-react";
+import DataFilter from "./DataFilter";
+import TypeFilter from "./TypeFilter";
+import { StatusFilter } from "./StatusFilter";
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
 type Props = {
-  statusFilter: string | null;
-  setStatusFilter: (value: string | null) => void;
-  typeFilter: string | null;
-  setTypeFilter: (value: string | null) => void;
+  statusFilter: string[];
+  setStatusFilter: (value: string[]) => void;
+  typeFilter: string[];
+  setTypeFilter: (value: string[]) => void;
   dateFilter: string | null;
   setDateFilter: (value: string | null) => void;
   resetFilters: () => void;
@@ -25,51 +19,104 @@ type Props = {
 export default function OrderFilters({
   statusFilter,
   setStatusFilter,
-  typeFilter,
+  typeFilter = [],
   setTypeFilter,
   dateFilter,
   setDateFilter,
   resetFilters,
-
 }: Props) {
-  const statuses = [...new Set(orders.map((order) => order.status))];
-  const types = [...new Set(orders.map((order) => order.type))];
-
   return (
     <Paper
       sx={{
         display: "flex",
         alignItems: "center",
         border: "1px solid #E5E7EB",
-        borderRadius: "16px",
-        overflow: "hidden",
+        borderRadius: 1,
+        overflow: "visible",
         height: 80,
-        width: "100%",
+        mb: 2,
+        width: "fit-content",
       }}
     >
-      <Box sx={{ width: 80, borderRight: "1px solid #E5E7EB" }}>
-  <TurntableIcon />
-</Box>
+      {/* Filter Icon */}
+      <div
+        style={{
+          width: 50,
+          borderRight: "1px solid #E5E7EB",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginRight: 16,
+        }}
+      >
+        <Filter size={30} />
+      </div>
 
-<Box sx={{ px: 4, borderRight: "1px solid #E5E7EB" }}>
-  Filter By
-</Box>
+      <div
+        style={{
+          display: "flex",
+          gap: 16,
+          alignItems: "center",
+          borderRadius: 1,
+        }}
+      >
+        {/* Date Filter */}
+        <DataFilter dateFilter={dateFilter} setDateFilter={setDateFilter} />
 
-<Box sx={{ px: 3, borderRight: "1px solid #E5E7EB" }}>
-  Date
-</Box>
+        <div
+          style={{
+            width: 1,
+            height: 60,
+            backgroundColor: "#E5E7EB",
+            borderRadius: 4,
+          }}
+        />
 
-<Box sx={{ px: 3, borderRight: "1px solid #E5E7EB" }}>
-  Order Type
-</Box>
+        {/* Order Type Filter */}
+        <TypeFilter typeFilter={typeFilter} setTypeFilter={setTypeFilter} />
 
-<Box sx={{ px: 3, borderRight: "1px solid #E5E7EB" }}>
-  Order Status
-</Box>
+        <div
+          style={{
+            width: 1,
+            height: 60,
+            backgroundColor: "#E5E7EB",
+            borderRadius: 4,
+          }}
+        />
 
-<Box sx={{ px: 4 }}>
-  Reset Filter
-</Box>
+        {/* Status Filter */}
+        <StatusFilter
+          statusFilter={statusFilter}
+          setStatusFilter={setStatusFilter}
+        />
+        {/* Reset Filter */}
+
+        <div
+          style={{
+            width: 1,
+            height: 60,
+            backgroundColor: "#E5E7EB",
+            borderRadius: 4,
+          }}
+        />
+
+        <button
+          onClick={resetFilters}
+          style={{
+            border: "none",
+            background: "transparent",
+            color: "#DC2626",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
+            fontWeight: 500,
+          }}
+        >
+          <RestartAltIcon sx={{ fontSize: 20 }} />
+          Reset Filter
+        </button>
+      </div>
     </Paper>
   );
 }

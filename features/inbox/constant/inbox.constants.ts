@@ -2,14 +2,15 @@ import type { Email, Label, SidebarGroup } from "../types/inbox.types";
 
 export const ROWS_PER_PAGE = 5;
 
-export const defaultLabelColors = [
-  "#4ADE80",
-  "#60A5FA",
-  "#FB923C",
-  "#C084FC",
-  "#F87171",
-  "#FBBF24",
-];
+export const colorMap: Record<string, { bg: string; text: string }> = {
+  "#4ADE80": { bg: "#DCFCE7", text: "#16A34A" },
+  "#60A5FA": { bg: "#DBEAFE", text: "#2563EB" },
+  "#FB923C": { bg: "#FFEDD5", text: "#EA580C" },
+  "#C084FC": { bg: "#F3E8FF", text: "#9333EA" },
+  "#F87171": { bg: "#FEE2E2", text: "#DC2626" },
+  "#FBBF24": { bg: "#FEF3C7", text: "#D97706" },
+};
+
 
 export const sidebarItems: SidebarGroup[] = [
   {
