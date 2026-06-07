@@ -1,17 +1,37 @@
-import { Button, Card, CardContent, Typography } from "@mui/material";
-import {events} from "../constants/events.data";
-import { Avatar, AvatarGroup, Box, Stack } from "@mui/material";
+"use client";
+import {
+  Button,
+  Card,
+  CardContent,
+  Typography,
+  Avatar,
+  AvatarGroup,
+  Box,
+  Stack,
+} from "@mui/material";
+import { events } from "../constants/events.data";
+import { useState } from "react";
+import AddIcon from "@mui/icons-material/Add";
+import { useRouter } from "next/navigation";
+import { AddEvent } from "./AddEvent";
 
-export  const Events = () => {
+export const Events = () => {
+  const [showEvent, setShowEvent] = useState(false);
+  const router = useRouter();
+
   return (
     <Card sx={{ width: 286 }}>
       <CardContent>
-        <Button variant="contained" fullWidth>
-          + Add New Event
+        <Button
+          variant="contained"
+          startIcon={<AddIcon />}
+          onClick={() => router.push("/dashboard/calendar/add")}
+        >
+          Add New Contact
         </Button>
+        {showEvent && <AddEvent />}
 
         <Typography sx={{ mt: 3, mb: 2 }}>You are going to</Typography>
-
         {events.map((event) => (
           <Stack key={event.id} direction="row" spacing={2} sx={{ mb: 3 }}>
             <Avatar />
@@ -19,11 +39,11 @@ export  const Events = () => {
             <Box>
               <Typography sx={{ fontWeight: 600 }}>{event.title}</Typography>
 
-              <Typography sx={{ variant: "caption", color: "text.secondary" }}>
+              <Typography variant="caption" color="text.secondary">
                 {event.date}
               </Typography>
 
-              <Typography sx={{ variant: "body2", color: "text.secondary" }}>
+              <Typography variant="body2" color="text.secondary">
                 {event.location}
               </Typography>
 
@@ -38,4 +58,4 @@ export  const Events = () => {
       </CardContent>
     </Card>
   );
-}
+};
