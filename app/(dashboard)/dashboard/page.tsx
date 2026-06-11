@@ -1,7 +1,7 @@
-import OrdersPage from '@/features/dashboard/pages/OrdersPage'
+import { DashboardPage } from "@/features/dashboard/pages/OrdersPage";
 
 const page = () => {
-  return <OrdersPage />
-}
+  return <DashboardPage />;
+};
 
-export default page
+export default page;

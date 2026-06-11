@@ -3,8 +3,18 @@ import StatsCard from "../components/stats-card";
 import { dashboardStats } from "../constants/dashboard-stats";
 import SalesChart from "../components/sales-chart";
 import DealsTable from "../../../shared/components/table/deals-table";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { decrypt } from "@/lib/session";
 
-const OrdersPage = () => {
+export const DashboardPage = async () => {
+  const cookieStore = await cookies();
+  const cookie = cookieStore.get("session")?.value;
+  const session = await decrypt(cookie);
+
+  if (!session?.userId) {
+    redirect("/auth/login");
+  }
   return (
     <>
       <h1>Dashboard</h1>
@@ -42,5 +52,3 @@ const OrdersPage = () => {
     </>
   );
 };
-
-export default OrdersPage;

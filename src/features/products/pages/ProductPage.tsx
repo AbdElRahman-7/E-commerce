@@ -9,6 +9,9 @@ const ProductPage = () => {
     </h1>
       <HeroSlider />
       <ProductCards />
+            
+
+      
     </>
   );
 };
