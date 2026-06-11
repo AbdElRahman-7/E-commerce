@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useTransition } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import {
   Drawer,
@@ -14,6 +15,7 @@ import {
 } from "@mui/material";
 import { SidebarProps } from "@/shared/types/sidebar";
 import { mainMenu, pageItems, settingsItems } from "@/shared/constants/sidebar.data";
+import { logout as logoutAction } from "@/actions/auth";
 
 
 
@@ -56,6 +58,17 @@ export default function Sidebar({ openSidebar, setOpenSidebar }: SidebarProps) {
 }
 
 function SidebarContent() {
+  {/*With the help of AI */}
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
+  const handleLogout = () => {
+    startTransition(async () => {
+      await logoutAction();
+      router.refresh();
+    });
+  };
+
   return (
     <Box
       sx={{
@@ -150,6 +163,30 @@ function SidebarContent() {
         <List>
           {settingsItems.map((item) => {
             const Icon = item.icon;
+            const isLogout = item.title === "Logout";
+
+            if (isLogout) {
+              return (
+                <ListItemButton
+                  key={item.title}
+                  onClick={(event: React.MouseEvent<HTMLDivElement>) => {
+                    event.preventDefault();
+                    handleLogout();
+                  }}
+                  disabled={isPending}
+                  sx={{
+                    borderRadius: 2,
+                    mb: 1,
+                    "&:hover": {
+                      backgroundColor: "#F3F4F6",
+                    },
+                  }}
+                >
+                  <Icon size={20} />
+                  <ListItemText primary={item.title} sx={{ ml: 2 }} />
+                </ListItemButton>
+              );
+            }
 
             return (
               <ListItemButton
@@ -159,14 +196,12 @@ function SidebarContent() {
                 sx={{
                   borderRadius: 2,
                   mb: 1,
-
                   "&:hover": {
                     backgroundColor: "#F3F4F6",
                   },
                 }}
               >
                 <Icon size={20} />
-
                 <ListItemText primary={item.title} sx={{ ml: 2 }} />
               </ListItemButton>
             );

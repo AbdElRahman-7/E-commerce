@@ -202,6 +202,7 @@ export default function Navbar({ setOpenSidebar }: NavbarProps) {
               <Typography variant="caption" color="text.secondary">
                 Admin
               </Typography>
+              
             </Box>
           </Box>
         </MenuItem>

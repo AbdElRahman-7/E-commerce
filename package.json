@@ -18,10 +18,14 @@
     "@mui/x-data-grid": "^9.3.0",
     "@mui/x-date-pickers": "^9.2.0",
     "@mui/x-scheduler": "^9.0.0-alpha.7",
+    "bcrypt": "^6.0.0",
     "chance": "^1.1.13",
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.21",
+    "jose": "^6.2.3",
     "lucide-react": "^1.16.0",
+    "mongodb": "^7.2.0",
+    "mongoose": "^9.6.3",
     "next": "16.2.6",
     "react": "19.2.4",
     "react-dom": "19.2.4",
@@ -30,6 +34,7 @@
     "swiper": "^12.1.4"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/chance": "^1.1.8",
     "@types/node": "^20",
     "@types/react": "^19",
