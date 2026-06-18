@@ -11,8 +11,8 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@mui/icons-material": "^9.0.1",
-    "@mui/material": "^9.0.1",
+    "@mui/icons-material": "^9.1.1",
+    "@mui/material": "^9.1.1",
     "@mui/material-nextjs": "^9.0.1",
     "@mui/x-charts": "^9.3.0",
     "@mui/x-data-grid": "^9.3.0",
@@ -24,6 +24,7 @@
     "dayjs": "^1.11.21",
     "jose": "^6.2.3",
     "lucide-react": "^1.16.0",
+    "material-ui-popup-state": "^5.3.7",
     "mongodb": "^7.2.0",
     "mongoose": "^9.6.3",
     "next": "16.2.6",
