@@ -66,7 +66,7 @@ export default function NotFound() {
             px: 4,
             width: 400,
           }}
-        >
+        > 
           Back Dashboard
         </Button>
       </Paper>
