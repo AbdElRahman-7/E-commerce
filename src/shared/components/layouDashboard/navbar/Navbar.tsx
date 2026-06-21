@@ -74,7 +74,6 @@ export default function Navbar({ setOpenSidebar }: NavbarProps) {
             },
           }}
         >
-          {/* LEFT SIDE */}
           <Box
             sx={{
               display: "flex",
@@ -86,7 +85,6 @@ export default function Navbar({ setOpenSidebar }: NavbarProps) {
               flex: 1,
             }}
           >
-            {/* Mobile Menu */}
             <IconButton
               onClick={() => setOpenSidebar(true)}
               sx={{
@@ -104,7 +102,6 @@ export default function Navbar({ setOpenSidebar }: NavbarProps) {
             <SearchBox />
           </Box>
 
-          {/* DESKTOP RIGHT */}
           <Box
             sx={{
               display: {
@@ -123,11 +120,8 @@ export default function Navbar({ setOpenSidebar }: NavbarProps) {
 
                 <LanguageSwitcher />
 
-            {/* Profile */}
             <ProfileMenu />
           </Box>
-
-          {/* MOBILE MENU */}
           <Box
             sx={{
               display: {
@@ -148,8 +142,7 @@ export default function Navbar({ setOpenSidebar }: NavbarProps) {
         </Toolbar>
       </AppBar>
 
-      {/* MOBILE DROPDOWN */}
-      <Menu
+    <Menu
         anchorEl={mobileMenuAnchor}
         open={Boolean(mobileMenuAnchor)}
         onClose={closeMobileMenu}

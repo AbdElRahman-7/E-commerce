@@ -1,9 +1,12 @@
 const typography = {
-  fontFamily: "Nunito Sans",
+  fontFamily: "Beatrice Deck Trial",
 
   h1: {
-    fontSize: "32px",
-    fontWeight: 700,
+    fontSize: "48px",
+    fontWeight: 800,
+    lineHeight: "40px",
+    letterSpacing: "2px",
+    textTransform: "uppercase",
   },
 
   h2: {

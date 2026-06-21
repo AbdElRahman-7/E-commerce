@@ -29,7 +29,6 @@ export default function DealsTable() {
         boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
       }}
     >
-      {/* Header */}
       <Box
         sx={{
           display: "flex",
@@ -49,8 +48,6 @@ export default function DealsTable() {
 
         <MonthDropdown value={month} onChange={setMonth} />
       </Box>
-
-      {/* Table */}
       <TableContainer>
         <Table>
           <TableHead>
