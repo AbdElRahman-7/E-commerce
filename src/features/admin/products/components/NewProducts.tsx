@@ -12,39 +12,8 @@ import {
 } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-
-const Newproducts = [
-  {
-    id: 1,
-    title: "Breakfast Special",
-    price: "$15",
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-  },
-  {
-    id: 2,
-    title: "Classic Burger",
-    price: "$12",
-    img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-  },
-  {
-    id: 3,
-    title: "French Pancakes",
-    price: "$10",
-    img: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf",
-  },
-  {
-    id: 4,
-    title: "Crispy Pizza",
-    price: "$18",
-    img: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
-  },
-  {
-    id: 5,
-    title: "Fresh Salad",
-    price: "$9",
-    img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd",
-  },
-];
+import { Newproducts } from "../constants/data";
+import Link from "next/link";
 
 export default function NewProducts() {
   const sliderRef = React.useRef<HTMLDivElement>(null);
@@ -65,7 +34,7 @@ export default function NewProducts() {
   };
 
   return (
-    <Box sx={{ width: "100%", my: 4 }}>
+    <Box sx={{ width: "100%", my: 7 }}>
       <Box
         sx={{
           display: "flex",
@@ -78,6 +47,7 @@ export default function NewProducts() {
         <Typography variant="h5" sx={{ fontWeight: 600, color: "#1A1A1A" }}>
           NEW THIS WEEK <sup>(50)</sup>
         </Typography>
+        <Link href="/products">
         <Button
           variant="text"
           endIcon={<ArrowForwardIosIcon sx={{ fontSize: "12px !important" }} />}
@@ -90,6 +60,7 @@ export default function NewProducts() {
         >
           See All
         </Button>
+        </Link>
       </Box>
 
       <Box
@@ -115,7 +86,7 @@ export default function NewProducts() {
               minWidth: { xs: 240, sm: 280 },
               maxWidth: { xs: 240, sm: 280 },
               border: "1px solid #E5E7EB",
-              borderRadius: "12px",
+              borderRadius: "2px",
               cursor: "pointer",
               transition: "transform 0.2s, box-shadow 0.2s",
               "&:hover": {
@@ -132,11 +103,7 @@ export default function NewProducts() {
               sx={{ objectFit: "cover" }}
             />
             <CardContent sx={{ p: 2 }}>
-              <Typography
-                variant="subtitle1"
-              >
-                {newproduct.title}
-              </Typography>
+              <Typography variant="subtitle1">{newproduct.title}</Typography>
               <Typography
                 variant="body2"
                 sx={{ color: "#666", fontWeight: 500 }}
@@ -148,11 +115,12 @@ export default function NewProducts() {
         ))}
       </Box>
 
-      <Box sx={{ display: "flex", justifyContent: "center", gap: 2, mt: 2 }}>
+      <Box sx={{ display: "flex", justifyContent: "center", gap: 1, mt: 2 }}>
         <IconButton
           onClick={() => scroll("left")}
           sx={{
             border: "1px solid #E5E7EB",
+            borderRadius: 0,
             backgroundColor: "#fff",
             color: "#000",
             "&:hover": { backgroundColor: "#F3F4F6" },
@@ -166,6 +134,8 @@ export default function NewProducts() {
           sx={{
             border: "1px solid #E5E7EB",
             backgroundColor: "#fff",
+            borderRadius: 0,
+
             color: "#000",
             "&:hover": { backgroundColor: "#F3F4F6" },
           }}

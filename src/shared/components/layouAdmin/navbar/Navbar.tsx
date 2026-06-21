@@ -23,8 +23,8 @@ type NavbarProps = {
 
 const mainmenus = [
   { name: "Home", path: "/" },
-  { name: "Collections", path: "/collections" },
-  { name: "New", path: "/new" },
+  { name: "Collections", path: "/products" },
+  { name: "New", path: "/products" },
 ];
 
 const CenterLogo = () => (
@@ -42,7 +42,7 @@ const CenterLogo = () => (
 
 export default function Navbar({ setOpenSidebar }: NavbarProps) {
   const [profileMenuAnchor, setProfileMenuAnchor] =
-    useState<HTMLButtonElement | null>(null);
+    useState<null | HTMLElement>(null);
 
   return (
     <AppBar
@@ -71,6 +71,7 @@ export default function Navbar({ setOpenSidebar }: NavbarProps) {
           >
             <MenuIcon />
           </IconButton>
+
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: 4 }}>
             {mainmenus.map((menu) => (
               <Link
@@ -79,14 +80,13 @@ export default function Navbar({ setOpenSidebar }: NavbarProps) {
                 style={{ textDecoration: "none" }}
               >
                 <Typography
-                  variant="body1"
                   sx={{
-                    fontWeight: 500,
-                    fontSize: "15px",
-                    color: "#333",
-                    cursor: "pointer",
-                    transition: "0.2s",
-                    "&:hover": { color: "#000" },
+                    color: "#111827",
+                    fontWeight: 600,
+                    transition: "color 0.2s ease",
+                    "&:hover": {
+                      color: "#2563EB",
+                    },
                   }}
                 >
                   {menu.name}
@@ -120,57 +120,59 @@ export default function Navbar({ setOpenSidebar }: NavbarProps) {
             justifyContent: "flex-end",
           }}
         >
-          <Link href="/wishlist" aria-label="Wishlist">
-            <IconButton
-              component="span"
-              sx={{
-                backgroundColor: "#222222",
-                color: "#fff",
-                width: 44,
-                height: 44,
-                "&:hover": { backgroundColor: "#000" },
-              }}
-            >
-              <FavoriteBorderIcon fontSize="small" />
-            </IconButton>
-          </Link>
+          <IconButton
+            component={Link}
+            href="/wishlist"
+            aria-label="Wishlist"
+            sx={{
+              backgroundColor: "#222222",
+              color: "#fff",
+              width: 44,
+              height: 44,
+              "&:hover": { backgroundColor: "#000" },
+            }}
+          >
+            <FavoriteBorderIcon fontSize="small" />
+          </IconButton>
 
-          <Link href="/cart" style={{ textDecoration: "none" }}>
+          <Box
+            component={Link}
+            href="/cart"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              backgroundColor: "#222222",
+              borderRadius: "50px",
+              padding: "4px 4px 4px 20px",
+              gap: 2,
+              cursor: "pointer",
+              transition: "0.2s",
+              textDecoration: "none",
+              "&:hover": { backgroundColor: "#000" },
+            }}
+          >
+            <Typography
+              sx={{ color: "#fff", fontSize: "14px", fontWeight: 500 }}
+            >
+              Cart
+            </Typography>
+
             <Box
               sx={{
+                width: 36,
+                height: 36,
+                backgroundColor: "#fff",
+                borderRadius: "50%",
                 display: "flex",
+                justifyContent: "center",
                 alignItems: "center",
-                backgroundColor: "#222222",
-                borderRadius: "50px",
-                padding: "4px 4px 4px 20px",
-                gap: 2,
-                cursor: "pointer",
-                transition: "0.2s",
-                "&:hover": { backgroundColor: "#000" },
               }}
             >
-              <Typography
-                sx={{ color: "#fff", fontSize: "14px", fontWeight: 500 }}
-              >
-                Cart
-              </Typography>
-              <Box
-                sx={{
-                  width: 36,
-                  height: 36,
-                  backgroundColor: "#fff",
-                  borderRadius: "50%",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <ShoppingBagOutlinedIcon
-                  sx={{ color: "#000", fontSize: "18px" }}
-                />
-              </Box>
+              <ShoppingBagOutlinedIcon
+                sx={{ color: "#000", fontSize: "18px" }}
+              />
             </Box>
-          </Link>
+          </Box>
 
           <IconButton
             onClick={(e) => setProfileMenuAnchor(e.currentTarget)}
@@ -186,15 +188,9 @@ export default function Navbar({ setOpenSidebar }: NavbarProps) {
               "&:hover": { backgroundColor: "#000" },
             }}
           >
-            <PersonIcon
-              sx={{
-                width: 40,
-                height: 40,
-                color: "#f5eeee",
-                padding: 1,
-              }}
-            />
+            <PersonIcon fontSize="small" />
           </IconButton>
+
           <Menu
             id="profile-menu"
             anchorEl={profileMenuAnchor}
@@ -209,14 +205,22 @@ export default function Navbar({ setOpenSidebar }: NavbarProps) {
               },
             }}
           >
-            <MenuItem onClick={() => setProfileMenuAnchor(null)}>
-              
-              <Link href="dashboard/settings"> Profile </Link>
+            <MenuItem
+              component={Link}
+              href="/dashboard/settings"
+              onClick={() => setProfileMenuAnchor(null)}
+            >
+              Profile
             </MenuItem>
-            <MenuItem onClick={() => setProfileMenuAnchor(null)}>
-              <Link href='/dashboard'></Link>
+
+            <MenuItem
+              component={Link}
+              href="/dashboard"
+              onClick={() => setProfileMenuAnchor(null)}
+            >
               My account
             </MenuItem>
+
             <MenuItem onClick={() => setProfileMenuAnchor(null)}>
               Logout
             </MenuItem>

@@ -1,5 +1,7 @@
 "use client";
 
+"use client";
+
 import React, { useState } from "react";
 import Navbar from "./navbar/Navbar";
 import Box from "@mui/material/Box";
