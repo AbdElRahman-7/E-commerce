@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-
+import { useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -11,17 +11,21 @@ import {
   MenuItem,
   IconButton,
 } from "@mui/material";
-
 import MenuIcon from "@mui/icons-material/Menu";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
+import Link from "next/link";
 
 type NavbarProps = {
   setOpenSidebar: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const mainmenus = ["Home", "Collections", "New"];
+const mainmenus = [
+  { name: "Home", path: "/" },
+  { name: "Collections", path: "/collections" },
+  { name: "New", path: "/new" },
+];
 
 const CenterLogo = () => (
   <svg
@@ -37,89 +41,88 @@ const CenterLogo = () => (
 );
 
 export default function Navbar({ setOpenSidebar }: NavbarProps) {
-  const [mobileMenuAnchor, setMobileMenuAnchor] =
-    React.useState<null | HTMLElement>(null);
   const [profileMenuAnchor, setProfileMenuAnchor] =
-    React.useState<null | HTMLElement>(null);
-
-  const closeMobileMenu = () => {
-    setMobileMenuAnchor(null);
-  };
+    useState<HTMLButtonElement | null>(null);
 
   return (
-    <>
-      <AppBar
-        position="sticky"
-        elevation={0}
+    <AppBar
+      position="static"
+      elevation={0}
+      sx={{
+        backgroundColor: "#F8F8F8",
+        borderBottom: "1px solid #E5E7EB",
+      }}
+    >
+      <Toolbar
         sx={{
-          backgroundColor: "#F8F8F8",
-          borderBottom: "1px solid #E5E7EB",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          position: "relative",
+          px: { xs: 2, md: 4 },
         }}
       >
-        <Toolbar
-          sx={{
-            minHeight: "80px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            position: "relative",
-            px: { xs: 2, md: 4 },
-          }}
-        >
-          {/* LEFT SIDE: Menu Icon & Links */}
-          <Box sx={{ display: "flex", alignItems: "center", gap: 3, flex: 1 }}>
-            <IconButton
-              onClick={() => setOpenSidebar(true)}
-              edge="start"
-              sx={{ color: "#000" }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Box sx={{ display: { xs: "none", md: "flex" }, gap: 4 }}>
-              {mainmenus.map((mainmenu) => (
+        <Box sx={{ display: "flex", alignItems: "center", gap: 3, flex: 1 }}>
+          <IconButton
+            onClick={() => setOpenSidebar((prev) => !prev)}
+            edge="start"
+            aria-label="Toggle sidebar"
+            sx={{ color: "#000" }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Box sx={{ display: { xs: "none", md: "flex" }, gap: 4 }}>
+            {mainmenus.map((menu) => (
+              <Link
+                key={menu.name}
+                href={menu.path}
+                style={{ textDecoration: "none" }}
+              >
                 <Typography
-                  key={mainmenu}
                   variant="body1"
                   sx={{
                     fontWeight: 500,
                     fontSize: "15px",
                     color: "#333",
                     cursor: "pointer",
+                    transition: "0.2s",
                     "&:hover": { color: "#000" },
                   }}
                 >
-                  {mainmenu}
+                  {menu.name}
                 </Typography>
-              ))}
-            </Box>
+              </Link>
+            ))}
           </Box>
+        </Box>
 
-          {/* Logo */}
-          <Box
-            sx={{
-              position: "absolute",
-              left: "50%",
-              transform: "translateX(-50%)",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+        <Box
+          sx={{
+            position: "absolute",
+            left: "50%",
+            transform: "translateX(-50%)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Link href="/" aria-label="Go to homepage">
             <CenterLogo />
-          </Box>
+          </Link>
+        </Box>
 
-          {/* RIGHT SIDE: Action Buttons */}
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1.5,
-              flex: 1,
-              justifyContent: "flex-end",
-            }}
-          >
-            {/* FAVORITE ICON */}
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 1.5,
+            flex: 1,
+            justifyContent: "flex-end",
+          }}
+        >
+          <Link href="/wishlist" aria-label="Wishlist">
             <IconButton
+              component="span"
               sx={{
                 backgroundColor: "#222222",
                 color: "#fff",
@@ -130,8 +133,9 @@ export default function Navbar({ setOpenSidebar }: NavbarProps) {
             >
               <FavoriteBorderIcon fontSize="small" />
             </IconButton>
+          </Link>
 
-            {/* CART BUTTON (Pill Shape) */}
+          <Link href="/cart" style={{ textDecoration: "none" }}>
             <Box
               sx={{
                 display: "flex",
@@ -166,60 +170,59 @@ export default function Navbar({ setOpenSidebar }: NavbarProps) {
                 />
               </Box>
             </Box>
+          </Link>
 
-            {/* PROFILE DROPDOWN */}
-            <IconButton
-              onClick={(event) => setProfileMenuAnchor(event.currentTarget)}
+          <IconButton
+            onClick={(e) => setProfileMenuAnchor(e.currentTarget)}
+            aria-label="Open profile menu"
+            aria-controls={profileMenuAnchor ? "profile-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={Boolean(profileMenuAnchor)}
+            sx={{
+              backgroundColor: "#222222",
+              color: "#fff",
+              width: 44,
+              height: 44,
+              "&:hover": { backgroundColor: "#000" },
+            }}
+          >
+            <PersonIcon
               sx={{
-                backgroundColor: "#222222",
-                color: "#fff",
-                width: 44,
-                height: 44,
-                "&:hover": { backgroundColor: "#000" },
+                width: 40,
+                height: 40,
+                color: "#f5eeee",
+                padding: 1,
               }}
-            >
-              <PersonIcon
-                sx={{
-                  width: 40,
-                  height: 40,
-                  color: "#f5eeee",
-                  padding: 1,
-                }}
-              />
-            </IconButton>
-            <Menu
-              anchorEl={profileMenuAnchor}
-              open={Boolean(profileMenuAnchor)}
-              onClose={() => setProfileMenuAnchor(null)}
-              sx={{
-                "& .MuiPaper-root": {
-                  mt: 1.5,
-                  minWidth: 150,
-                  borderRadius: "12px",
-                  boxShadow: "0px 8px 24px rgba(0,0,0,0.1)",
-                },
-              }}
-            >
-              <MenuItem onClick={() => setProfileMenuAnchor(null)}>
-                Profile
-              </MenuItem>
-              <MenuItem onClick={() => setProfileMenuAnchor(null)}>
-                My account
-              </MenuItem>
-              <MenuItem onClick={() => setProfileMenuAnchor(null)}>
-                Logout
-              </MenuItem>
-            </Menu>
-          </Box>
-        </Toolbar>
-      </AppBar>
-
-      {/* MOBILE DROPDOWN */}
-      <Menu
-        anchorEl={mobileMenuAnchor}
-        open={Boolean(mobileMenuAnchor)}
-        onClose={closeMobileMenu}
-      />
-    </>
+            />
+          </IconButton>
+          <Menu
+            id="profile-menu"
+            anchorEl={profileMenuAnchor}
+            open={Boolean(profileMenuAnchor)}
+            onClose={() => setProfileMenuAnchor(null)}
+            sx={{
+              "& .MuiPaper-root": {
+                mt: 1.5,
+                minWidth: 150,
+                borderRadius: "12px",
+                boxShadow: "0px 8px 24px rgba(0,0,0,0.1)",
+              },
+            }}
+          >
+            <MenuItem onClick={() => setProfileMenuAnchor(null)}>
+              
+              <Link href="dashboard/settings"> Profile </Link>
+            </MenuItem>
+            <MenuItem onClick={() => setProfileMenuAnchor(null)}>
+              <Link href='/dashboard'></Link>
+              My account
+            </MenuItem>
+            <MenuItem onClick={() => setProfileMenuAnchor(null)}>
+              Logout
+            </MenuItem>
+          </Menu>
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 }

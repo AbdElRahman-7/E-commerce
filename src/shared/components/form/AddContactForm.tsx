@@ -8,7 +8,6 @@ import {
   MenuItem,
   Paper,
   TextField,
-  Typography,
 } from "@mui/material";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 
@@ -22,7 +21,6 @@ export default function AddContactForm() {
     >
     
 
-      {/* Profile Upload */}
       <Box
        sx={{ display:"flex",
         justifyContent:"center",

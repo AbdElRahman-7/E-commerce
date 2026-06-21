@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Box, Typography, Button, Paper } from "@mui/material"; // ضفنا Paper هنا
+import { Box, Typography, Button, Paper } from "@mui/material";
 
 export default function NotFound() {
   return (

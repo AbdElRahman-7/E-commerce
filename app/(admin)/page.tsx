@@ -1,11 +1,11 @@
-import React from 'react'
+import AdminPages from "@/features/admin/products/pages/AdminPages";
 
-const page = () => {
+const Page = () => {
   return (
-    <div>
-    Home
-    </div>
-  )
-}
+    <>
+      <AdminPages />
+    </>
+  );
+};
 
-export default page
+export default Page;

@@ -41,7 +41,7 @@ export const mainMenu: SidebarItem[] = [
   },
   {
     title: "Order Lists",
-    href: "/dashboard/oredrlists",
+    href: "/dashboard/orderlists",
     icon: ShoppingCart,
   },
   {

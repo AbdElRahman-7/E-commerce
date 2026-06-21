@@ -33,7 +33,6 @@ export async function login(_prevState: unknown, formData: FormData) {
   redirect("/dashboard");
 }
 {
-  /*With the help of AI */
 }
 export async function register(_prevState: unknown, formData: FormData) {
   const name = formData.get("name") as string;

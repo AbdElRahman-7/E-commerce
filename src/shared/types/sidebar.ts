@@ -10,4 +10,3 @@ export type SidebarItem = {
   href: string;
   icon: LucideIcon;
 };
-
