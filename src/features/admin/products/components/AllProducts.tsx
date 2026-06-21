@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Link from "next/link";
 
 const collections = [
   {
@@ -66,18 +67,22 @@ export default function AllProdcuts() {
         <Typography variant="h5" sx={{ fontWeight: 600, color: "#1A1A1A" }}>
           XIV COLLECTIONS 23-24
         </Typography>
-        <Button
-          variant="text"
-          endIcon={<ArrowForwardIosIcon sx={{ fontSize: "12px !important" }} />}
-          onClick={handleSeeAll}
-          sx={{
-            color: "#222",
-            fontWeight: 600,
-            "&:hover": { backgroundColor: "transparent", color: "#000" },
-          }}
-        >
-          See All
-        </Button>
+        <Link href="/products">
+          <Button
+            variant="text"
+            endIcon={
+              <ArrowForwardIosIcon sx={{ fontSize: "12px !important" }} />
+            }
+            onClick={handleSeeAll}
+            sx={{
+              color: "#222",
+              fontWeight: 600,
+              "&:hover": { backgroundColor: "transparent", color: "#000" },
+            }}
+          >
+            See All
+          </Button>
+        </Link>
       </Box>
 
       <Box
@@ -138,7 +143,7 @@ export default function AllProdcuts() {
         <Button
           variant="text"
           endIcon={<ExpandMoreIcon />}
-          onClick={handleSeeAll} 
+          onClick={handleSeeAll}
           sx={{
             color: "#222222",
             fontWeight: 600,
