@@ -11,8 +11,11 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { productsData, categories } from "../constants/data";
-
+import { useProductsFilter } from "../hooks/useProductsFilter";
 export default function ProductsAdmin() {
+  const { categoryFilter, searchQuery, setSearchQuery, filteredProducts } =
+    useProductsFilter(productsData);
+
   return (
     <Box sx={{ p: { xs: 2, md: 4 }, width: "100%" }}>
       <Typography
@@ -22,9 +25,10 @@ export default function ProductsAdmin() {
           color: "#1A1A1A",
           mb: 3,
           letterSpacing: "1px",
+          textTransform: "uppercase",
         }}
       >
-        PRODUCTS
+        {categoryFilter ? `${categoryFilter} PRODUCTS` : "ALL PRODUCTS"}
       </Typography>
 
       <Box
@@ -49,7 +53,9 @@ export default function ProductsAdmin() {
         >
           <SearchIcon sx={{ color: "#000", mr: 1, fontSize: "20px" }} />
           <InputBase
-            placeholder="Search"
+            placeholder="Search products..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             sx={{ flex: 1, color: "#000", fontSize: "14px", fontWeight: 500 }}
           />
         </Box>
@@ -87,95 +93,111 @@ export default function ProductsAdmin() {
         </Box>
       </Box>
 
-      <Grid container spacing={3}>
-        {productsData.map((product) => (
-          <Grid sx={{ xs: 12, sm: 6, md: 4 }} key={product.id}>
-            <Card
-              elevation={0}
-              sx={{
-                backgroundColor: "transparent",
-                borderRadius: 0,
-                cursor: "pointer",
-                "&:hover img": { transform: "scale(1.03)" },
-              }}
-            >
-              <Box
-                sx={{ overflow: "hidden", backgroundColor: "#F3F4F6", mb: 1.5 }}
+      {filteredProducts.length === 0 ? (
+        <Box sx={{ textAlign: "center", py: 10 }}>
+          <Typography variant="h6" color="text.secondary">
+            No products found matching your criteria.
+          </Typography>
+        </Box>
+      ) : (
+        <Grid container spacing={3}>
+          {filteredProducts.map((product) => (
+            <Grid size={{ xs: 12, sm: 6, md: 4 }} key={product.id}>
+              <Card
+                elevation={0}
+                sx={{
+                  backgroundColor: "transparent",
+                  borderRadius: 0,
+                  cursor: "pointer",
+                  "&:hover img": { transform: "scale(1.03)" },
+                }}
               >
-                <CardMedia
-                  component="img"
-                  height="450"
-                  image={product.img}
-                  alt={product.name}
-                  sx={{
-                    objectFit: "cover",
-                    transition: "transform 0.3s ease",
-                  }}
-                />
-              </Box>
-
-              <CardContent sx={{ p: "0 !important" }}>
                 <Box
                   sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 1,
-                    mb: 0.5,
+                    overflow: "hidden",
+                    backgroundColor: "#F3F4F6",
+                    mb: 1.5,
                   }}
                 >
-                  <Typography
-                    sx={{ fontSize: "12px", color: "#6B7280", fontWeight: 500 }}
+                  <CardMedia
+                    component="img"
+                    height="450"
+                    image={product.img}
+                    alt={product.name}
+                    sx={{
+                      objectFit: "cover",
+                      transition: "transform 0.3s ease",
+                    }}
+                  />
+                </Box>
+
+                <CardContent sx={{ p: "0 !important" }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 1,
+                      mb: 0.5,
+                    }}
                   >
-                    {product.type}
-                  </Typography>
-
-                  {product.colorCode && (
-                    <Box
-                      sx={{
-                        width: "12px",
-                        height: "12px",
-                        backgroundColor: product.colorCode,
-                        border: "1px solid #D1D5DB",
-                      }}
-                    />
-                  )}
-
-                  {product.extraColors > 0 && (
                     <Typography
                       sx={{
-                        fontSize: "11px",
-                        color: "#9CA3AF",
-                        fontWeight: 600,
+                        fontSize: "12px",
+                        color: "#6B7280",
+                        fontWeight: 500,
                       }}
                     >
-                      +{product.extraColors}
+                      {product.type}
                     </Typography>
-                  )}
-                </Box>
 
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <Typography
-                    sx={{ fontSize: "15px", fontWeight: 800, color: "#111" }}
+                    {product.colorCode && (
+                      <Box
+                        sx={{
+                          width: "12px",
+                          height: "12px",
+                          backgroundColor: product.colorCode,
+                          border: "1px solid #D1D5DB",
+                        }}
+                      />
+                    )}
+
+                    {(product.extraColors ?? 0) > 0 && (
+                      <Typography
+                        sx={{
+                          fontSize: "11px",
+                          color: "#9CA3AF",
+                          fontWeight: 600,
+                        }}
+                      >
+                        +{product.extraColors}
+                      </Typography>
+                    )}
+                  </Box>
+
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
                   >
-                    {product.name}
-                  </Typography>
-                  <Typography
-                    sx={{ fontSize: "14px", fontWeight: 600, color: "#111" }}
-                  >
-                    $ {product.price}
-                  </Typography>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+                    <Typography
+                      sx={{ fontSize: "15px", fontWeight: 800, color: "#111" }}
+                    >
+                      {product.name}
+                    </Typography>
+                    <Typography
+                      sx={{ fontSize: "14px", fontWeight: 600, color: "#111" }}
+                    >
+                      $ {product.price}
+                    </Typography>
+                  </Box>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      )}
     </Box>
   );
 }

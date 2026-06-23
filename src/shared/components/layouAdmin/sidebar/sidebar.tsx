@@ -142,7 +142,7 @@ export const SidebarAdmin = ({ openSidebar, setOpenSidebar }: SidebarProps) => {
           >
             <Button
               component={Link}
-              href="/shop"
+              href="/products"
               sx={{
                 backgroundColor: "#e0e0e0",
                 color: "#1a1a1a",
