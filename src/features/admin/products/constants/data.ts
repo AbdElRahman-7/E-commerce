@@ -1,76 +1,87 @@
 export const itemData = [
   {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
+    img: "/home.jpg",
+    title: "white",
   },
   {
-    img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-    title: "Burger",
+    img: "/home2.jpg",
+    title: "black",
   },
-  
 ];
 
 export const Newproducts = [
   {
     id: 1,
-    title: "Breakfast Special",
-    price: "$15",
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
+    title: "Embroidered Seersucker Shirt",
+    categories: "V-Neck T-Shirt",
+    price: "$99",
+    img: "/home.jpg",
   },
   {
     id: 2,
-    title: "Classic Burger",
-    price: "$12",
-    img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
+    title: "Basic Slim Fit T-Shirt",
+    categories: "Cotton T Shirt",
+
+    price: "$99",
+    img: "/home2.jpg",
   },
   {
     id: 3,
-    title: "French Pancakes",
-    price: "$10",
-    img: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf",
+    title: "Blurred Print T-Shirt",
+    categories: "Henley T-Shirt",
+
+    price: "$99",
+    img: "/home.jpg",
   },
   {
     id: 4,
-    title: "Crispy Pizza",
-    price: "$18",
-    img: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+    title: "Full Sleeve Zipper",
+    categories: "Crewneck T-Shirt",
+
+    price: "$99",
+    img: "/home2.jpg",
   },
   {
     id: 5,
     title: "Fresh Salad",
-    price: "$9",
-    img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd",
+    categories: "V-Neck T-Shirt",
+
+    price: "$99",
+    img: "/home.jpg",
   },
 ];
-
 
 export const productsData = [
   {
     id: 1,
     type: "Cotton T Shirt",
     name: "Basic Slim Fit T-Shirt",
+    category: "Cotton T Shirt",
     price: 199,
     extraColors: 5,
     colorCode: "#F5F5DC",
-    img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?fit=crop&w=500&h=600",
+    img: "/home.jpg",
   },
   {
     id: 2,
     type: "Crewneck T-Shirt",
     name: "Basic Heavy Weight T-Shirt",
+    category: "Cotton  jeans ",
     price: 199,
+
     extraColors: 6,
     colorCode: "#222222",
-    img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?fit=crop&w=500&h=600",
+    img: "/home2.jpg",
   },
   {
     id: 3,
     type: "Cotton T Shirt",
     name: "Full Sleeve Zipper",
+    category: "Cotton T Shirt",
     price: 199,
     extraColors: 0,
     colorCode: "",
-    img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?fit=crop&w=500&h=600",
+    img: "/home.jpg",
   },
 ];
 export const categories = [

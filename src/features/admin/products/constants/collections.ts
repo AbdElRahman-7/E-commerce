@@ -1,0 +1,42 @@
+export const collections = [
+  {
+    id: 1,
+    title: "Breakfast Special",
+    price: "15",
+    img: "/home2.jpg",
+    categories: "Morning Picks",
+    variants: 3,
+  },
+  {
+    id: 2,
+    title: "Classic Burger",
+    price: "12",
+    img: "/home.jpg",
+    categories: "Burgers",
+    variants: 5,
+  },
+  {
+    id: 3,
+    title: "French Pancakes",
+    price: "10",
+    img: "/home2.jpg",
+    categories: "Desserts",
+    variants: 2,
+  },
+  {
+    id: 4,
+    title: "Crispy Pizza",
+    price: "18",
+    img: "/home.jpg",
+    categories: "Pizza",
+    variants: 4,
+  },
+  {
+    id: 5,
+    title: "Fresh Salad",
+    price: "9",
+    img: "/home2.jpg",
+    categories: "Healthy",
+    variants: 3,
+  },
+];
