@@ -11,8 +11,8 @@ import {
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store";
-import { toggleWishlistItem, Product } from "@/store/wishlistSlice";
+import { RootState } from "../../../../store";
+import { toggleWishlistItem, Product } from "../../../../store/wishlistSlice";
 
 interface ProductCardProps {
   product: Product;

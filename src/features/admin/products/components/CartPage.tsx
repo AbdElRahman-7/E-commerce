@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "@/store";
-import { removeFromCart, updateQuantity } from "@/store/cartSlice"; // استيراد الأوامر
+import { RootState } from "../../../../store";
+import { removeFromCart, updateQuantity } from "../../../../store/cartSlice"; // استيراد الأوامر
 import {
   Box,
   Typography,
