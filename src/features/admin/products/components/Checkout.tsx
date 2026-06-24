@@ -47,7 +47,10 @@ export default function Checkout() {
   return (
     <Box sx={{ p: { xs: 2, md: 5 }, maxWidth: "1200px", margin: "0 auto" }}>
       
-      <Box sx={{ mb: 4, cursor: "pointer", display: "inline-block" }}>
+      <Box
+        sx={{ mb: 4, cursor: "pointer", display: "inline-block" }}
+        onClick={() => window.history.back()}
+      >
         <ArrowRightAltIcon sx={{ transform: "rotate(180deg)", fontSize: "32px" }} />
       </Box>
 

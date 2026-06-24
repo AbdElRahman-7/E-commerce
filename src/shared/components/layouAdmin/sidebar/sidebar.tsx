@@ -12,15 +12,14 @@ import {
   ListItemText,
   InputBase,
   Button,
-  IconButton,
+  //IconButton,
 } from "@mui/material";
-
 import SearchIcon from "@mui/icons-material/Search";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-
 import { SidebarProps } from "@/shared/types/sidebar";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+
+//import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+//import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 const menuSidebar = [
   { title: "MEN", href: "/products?category=men" },
@@ -168,7 +167,7 @@ export const SidebarAdmin = ({ openSidebar, setOpenSidebar }: SidebarProps) => {
               />
             </Button>
 
-            <Box sx={{ display: "flex", gap: 1 }}>
+            {/***   <Box sx={{ display: "flex", gap: 1 }}>
               <IconButton
                 sx={{
                   border: "1px solid #ccc",
@@ -192,6 +191,7 @@ export const SidebarAdmin = ({ openSidebar, setOpenSidebar }: SidebarProps) => {
                 <KeyboardArrowRightIcon />
               </IconButton>
             </Box>
+            */}
           </Box>
         </Box>
       </Box>
