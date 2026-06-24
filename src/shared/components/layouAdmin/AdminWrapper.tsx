@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import { SidebarAdmin } from "./sidebar/sidebar";
 import { usePathname } from "next/navigation";
 import FilterSidebar from "@/features/admin/products/components/FilterSidebar";
-import StoreProvider from "@/store/StoreProvider";
+import StoreProvider from "../../../store/StoreProvider";
 
 export default function AdminWrapper({
   children,

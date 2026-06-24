@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store";
+import { RootState } from "../../../src/store";
 import { Container, Grid, Typography, Box } from "@mui/material";
 import ProductCard from "@/features/admin/products/components/ProductCard";
 
