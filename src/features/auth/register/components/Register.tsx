@@ -31,14 +31,14 @@ export const Register = () => {
       <Paper
         elevation={3}
         sx={{
-          p: 4,
+          p: { xs: 2, sm: 4 },
           borderRadius: 2,
           width: "100%",
           maxWidth: 630,
           bgcolor: "white",
         }}
       >
-        <Box sx={{ maxWidth: 512, p: 4, mx: "auto" }}>
+        <Box sx={{ maxWidth: 512, p: { xs: 1, sm: 4 }, mx: "auto" }}>
           <Typography
             variant="h5"
             component="h1"
@@ -101,7 +101,7 @@ export const Register = () => {
                 size="large"
                 disabled={isPending}
                 fullWidth
-                sx={{ mt: 2, maxWidth: 300, alignSelf: "center" }}
+                sx={{ mt: 2, maxWidth: { xs: "100%", sm: 300 }, alignSelf: "center" }}
               >
                 {isPending ? "Creating..." : "Sign Up"}
               </Button>
@@ -111,7 +111,7 @@ export const Register = () => {
                   Already have an account?{" "}
                   <MuiLink
                     component={NextLink}
-                    href="/dashboard"
+                    href="/login"
                     underline="hover"
                     sx={{ fontWeight: "bold", color: "primary.main" }}
                   >

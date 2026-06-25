@@ -1,4 +1,3 @@
-// store/wishlistSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface Product {

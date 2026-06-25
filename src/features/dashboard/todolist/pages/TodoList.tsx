@@ -61,7 +61,6 @@ export default function TodoListPage() {
 
   return (
     <Container maxWidth={false} sx={{ py: 4 }}>
-      {/* Header */}
       <Box
         sx={{
           display: "flex",
@@ -94,7 +93,6 @@ export default function TodoListPage() {
         </Button>
       </Box>
 
-      {/* Input Section */}
       <Paper
         elevation={0}
         sx={{
@@ -120,7 +118,6 @@ export default function TodoListPage() {
         />
       </Paper>
 
-      {/* Tasks */}
       <Box>
         {tasks.map((task) => (
           <TodoList

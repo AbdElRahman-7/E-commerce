@@ -12,14 +12,10 @@ import {
   ListItemText,
   InputBase,
   Button,
-  //IconButton,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { SidebarProps } from "@/shared/types/sidebar";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
-
-//import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-//import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 const menuSidebar = [
   { title: "MEN", href: "/products?category=men" },
@@ -27,7 +23,12 @@ const menuSidebar = [
   { title: "KIDS", href: "/products?category=kids" },
 ];
 
-export const SidebarAdmin = ({ openSidebar, setOpenSidebar }: SidebarProps) => {
+export const SidebarAdmin = ({
+  openSidebar,
+  setOpenSidebar,
+  desktopVisible = true,
+  mobileVisible = true,
+}: SidebarProps) => {
   const [search, setSearch] = useState("");
 
   const handleCloseSidebar = () => {
@@ -45,10 +46,50 @@ export const SidebarAdmin = ({ openSidebar, setOpenSidebar }: SidebarProps) => {
         onClose={handleCloseSidebar}
         variant="temporary"
         sx={{
-          display: { xs: "block", md: "none" },
+          display: mobileVisible ? { xs: "block", md: "none" } : "none",
+          "& .MuiDrawer-paper": {
+            width: "min(82vw, 320px)",
+          },
         }}
       >
-        <Box sx={{ width: 260, p: 2 }}>
+        <Box sx={{ width: "100%", p: 2 }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              backgroundColor: "#E5E7EB",
+              px: 2,
+              py: 1,
+              width: "100%",
+              mb: 2,
+            }}
+          >
+            <SearchIcon
+              sx={{
+                color: "#000",
+                mr: 1,
+                fontSize: 20,
+              }}
+            />
+
+            <InputBase
+              placeholder="Search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              sx={{
+                flex: 1,
+                color: "#000",
+                fontSize: 14,
+                fontWeight: 500,
+                "& .MuiInputBase-input": {
+                  width: "100%",
+                  padding: "0.5rem",
+                  cursor: "text",
+                },
+              }}
+            />
+          </Box>
+
           <List>
             {filteredMenu.map((item) => (
               <ListItemButton
@@ -66,10 +107,10 @@ export const SidebarAdmin = ({ openSidebar, setOpenSidebar }: SidebarProps) => {
 
       <Box
         sx={{
-          width: 350,
+          width: { md: 280, lg: 350 },
           borderRight: "1px solid #E5E7EB",
           backgroundColor: "#fff",
-          display: { xs: "none", md: "block" },
+          display: desktopVisible ? { xs: "none", md: "block" } : "none",
           p: 2,
         }}
       >
@@ -115,6 +156,11 @@ export const SidebarAdmin = ({ openSidebar, setOpenSidebar }: SidebarProps) => {
                 color: "#000",
                 fontSize: 14,
                 fontWeight: 500,
+                "& .MuiInputBase-input": {
+                  width: "100%",
+                  padding: "0.5rem",
+                  cursor: "text",
+                },
               }}
             />
           </Box>
@@ -123,7 +169,7 @@ export const SidebarAdmin = ({ openSidebar, setOpenSidebar }: SidebarProps) => {
             variant="h1"
             sx={{
               fontWeight: 800,
-              fontSize: "48px",
+              fontSize: { md: "36px", lg: "48px" },
               letterSpacing: "2px",
             }}
           >
@@ -135,7 +181,7 @@ export const SidebarAdmin = ({ openSidebar, setOpenSidebar }: SidebarProps) => {
               display: "flex",
               alignItems: "center",
               gap: 1.5,
-              mt: 17,
+              mt: { md: 8, lg: 17 },
               width: "100%",
             }}
           >
@@ -166,32 +212,6 @@ export const SidebarAdmin = ({ openSidebar, setOpenSidebar }: SidebarProps) => {
                 sx={{ fontSize: 32, ml: 2, fontWeight: 300 }}
               />
             </Button>
-
-            {/***   <Box sx={{ display: "flex", gap: 1 }}>
-              <IconButton
-                sx={{
-                  border: "1px solid #ccc",
-                  borderRadius: 0,
-                  width: "52px",
-                  height: "52px",
-                  color: "#aaa",
-                }}
-              >
-                <KeyboardArrowLeftIcon />
-              </IconButton>
-              <IconButton
-                sx={{
-                  border: "1px solid #ccc",
-                  borderRadius: 0,
-                  width: "52px",
-                  height: "52px",
-                  color: "#1a1a1a",
-                }}
-              >
-                <KeyboardArrowRightIcon />
-              </IconButton>
-            </Box>
-            */}
           </Box>
         </Box>
       </Box>

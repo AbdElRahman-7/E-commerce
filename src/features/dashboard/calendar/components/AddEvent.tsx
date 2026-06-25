@@ -5,10 +5,8 @@ import {
   Box,
   Button,
   Grid,
-  MenuItem,
   Paper,
   TextField,
-  Typography,
 } from "@mui/material";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 
@@ -21,7 +19,6 @@ export const AddEvent = () => {
           borderRadius: 3,
         }}
       >
-        {/* Profile Upload */}
         <Box sx={{ display: "flex", justifyContent: "center", mb: 5 }}>
           <Box sx={{ textAlign: "center" }}>
             <Avatar

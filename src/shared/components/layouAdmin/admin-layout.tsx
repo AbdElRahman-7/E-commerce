@@ -14,7 +14,7 @@ export default async function AdminLayout({
   const session = await decrypt(cookie);
 
   if (!session?.userId) {
-    redirect("/auth/login");
+    redirect("/login");
   }
 
   return (

@@ -39,11 +39,12 @@ setOpenSidebar,
 return (
 <Box
     sx={{
-    width: 280,
-    minWidth: 280,
+    width: { xs: "100%", sm: 320, md: 280 },
+    minWidth: { md: 280 },
     backgroundColor: "#F8F8F8",
     borderRight: "1px solid #E5E7EB",
     height: "100%",
+    maxHeight: { xs: "calc(100vh - 64px)", md: "none" },
     overflowY: "auto",
     display: { xs: openSidebar ? "block" : "none", md: "block" },
     "&::-webkit-scrollbar": { display: "none" },

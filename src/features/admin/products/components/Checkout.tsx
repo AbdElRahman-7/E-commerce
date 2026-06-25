@@ -11,28 +11,21 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
-import EastIcon from "@mui/icons-material/East"; 
-
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt"; const orderItems = [
-  {
-    id: 1,
-    name: "Basic Heavy T-Shirt",
-    variant: "Black/L",
-    price: 99,
-    qty: 1,
-    img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?fit=crop&w=200&h=250",
-  },
-  {
-    id: 2,
-    name: "Basic Fit T-Shirt",
-    variant: "Black/L",
-    price: 99,
-    qty: 1,
-    img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?fit=crop&w=200&h=250",
-  },
-];
+import EastIcon from "@mui/icons-material/East";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import Link from "next/link";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 export default function Checkout() {
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+
+  const subtotal = cartItems.reduce(
+    (acc, item) => acc + item.product.price * item.quantity,
+    0,
+  );
+  const total = subtotal;
+
   const inputStyles = {
     "& .MuiOutlinedInput-root": {
       borderRadius: 0,
@@ -45,7 +38,7 @@ export default function Checkout() {
   };
 
   return (
-    <Box sx={{ p: { xs: 2, md: 5 }, maxWidth: "1200px", margin: "0 auto" }}>
+    <Box sx={{ p: { xs: 1.5, sm: 2, md: 5 }, maxWidth: "1200px", margin: "0 auto", width: "100%" }}>
       
       <Box
         sx={{ mb: 4, cursor: "pointer", display: "inline-block" }}
@@ -132,45 +125,59 @@ export default function Checkout() {
           >
             <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 4 }}>
               <Typography sx={{ fontSize: "14px", fontWeight: 800 }}>YOUR ORDER</Typography>
-              <Typography sx={{ fontSize: "14px", fontWeight: 800, color: "#1D4ED8" }}>(2)</Typography>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                <Typography sx={{ fontSize: "14px", fontWeight: 800, color: "#1D4ED8" }}>({cartItems.length})</Typography>
+                <Link href="/cart" style={{ textDecoration: "none" }}>
+                  <Typography sx={{ fontSize: "12px", fontWeight: 700, color: "#1A1A1A", textDecoration: "underline", cursor: "pointer", "&:hover": { color: "#6B7280" } }}>
+                    View Cart
+                  </Typography>
+                </Link>
+              </Box>
             </Box>
 
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 3, mb: 4 }}>
-              {orderItems.map((item) => (
-                <Box key={item.id} sx={{ display: "flex", gap: 2 }}>
-                  <Box
-                    component="img"
-                    src={item.img}
-                    alt={item.name}
-                    sx={{ width: "80px", height: "100px", objectFit: "cover", backgroundColor: "#E5E7EB" }}
-                  />
-                  
-                  <Box sx={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                    <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                      <Box>
-                        <Typography sx={{ fontSize: "13px", fontWeight: 600, color: "#000" }}>{item.name}</Typography>
-                        <Typography sx={{ fontSize: "12px", color: "#6B7280" }}>{item.variant}</Typography>
-                      </Box>
-                      <Typography sx={{ fontSize: "12px", fontWeight: 600, cursor: "pointer", textDecoration: "underline", "&:hover": { color: "#6B7280" } }}>
-                        Change
-                      </Typography>
-                    </Box>
+            {cartItems.length === 0 ? (
+              <Typography sx={{ fontSize: "13px", color: "#6B7280", mb: 4, textAlign: "center" }}>
+                Your cart is empty.
+              </Typography>
+            ) : (
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 3, mb: 4 }}>
+                {cartItems.map(({ product, quantity }) => (
+                  <Box key={product.id} sx={{ display: "flex", gap: 2 }}>
+                    <Box
+                      component="img"
+                      src={product.imageUrl}
+                      alt={product.name}
+                      sx={{ width: "80px", height: "100px", objectFit: "cover", backgroundColor: "#E5E7EB", flexShrink: 0 }}
+                    />
 
-                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
-                      <Typography sx={{ fontSize: "13px", fontWeight: 800, color: "#1D4ED8" }}>({item.qty})</Typography>
-                      <Typography sx={{ fontSize: "14px", fontWeight: 600 }}>$ {item.price}</Typography>
+                    <Box sx={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                        <Box>
+                          <Typography sx={{ fontSize: "13px", fontWeight: 600, color: "#000" }}>{product.name}</Typography>
+                        </Box>
+                        <Link href="/cart" style={{ textDecoration: "none" }}>
+                          <Typography sx={{ fontSize: "12px", fontWeight: 600, cursor: "pointer", textDecoration: "underline", color: "#000", "&:hover": { color: "#6B7280" } }}>
+                            Change
+                          </Typography>
+                        </Link>
+                      </Box>
+
+                      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+                        <Typography sx={{ fontSize: "13px", fontWeight: 800, color: "#1D4ED8" }}>x{quantity}</Typography>
+                        <Typography sx={{ fontSize: "14px", fontWeight: 600 }}>$ {(product.price * quantity).toFixed(2)}</Typography>
+                      </Box>
                     </Box>
                   </Box>
-                </Box>
-              ))}
-            </Box>
+                ))}
+              </Box>
+            )}
 
             <Divider sx={{ mb: 3 }} />
 
             <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5, mb: 3 }}>
               <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Typography sx={{ fontSize: "13px", fontWeight: 600 }}>Subtotal</Typography>
-                <Typography sx={{ fontSize: "14px", fontWeight: 800 }}>$180.00</Typography>
+                <Typography sx={{ fontSize: "14px", fontWeight: 800 }}>${subtotal.toFixed(2)}</Typography>
               </Box>
               <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <Typography sx={{ fontSize: "13px", fontWeight: 600 }}>Shipping</Typography>
@@ -182,7 +189,7 @@ export default function Checkout() {
 
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Typography sx={{ fontSize: "15px", fontWeight: 800 }}>Total</Typography>
-              <Typography sx={{ fontSize: "15px", fontWeight: 800 }}>$180.00</Typography>
+              <Typography sx={{ fontSize: "15px", fontWeight: 800 }}>${total.toFixed(2)}</Typography>
             </Box>
 
           </Box>

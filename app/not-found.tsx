@@ -27,7 +27,8 @@ export default function NotFound() {
           textAlign: "center",
           p: { xs: 4, md: 6 },
           borderRadius: 1,
-          width: 600,
+          width: "100%",
+          maxWidth: 600,
         }}
       >
         <Box
@@ -48,13 +49,13 @@ export default function NotFound() {
           />
         </Box>
 
-        <Typography variant="h1" sx={{ mb: 4, maxWidth: 400 }}>
+        <Typography variant="h3" sx={{ mb: 4, maxWidth: 400, fontSize: { xs: "1.8rem", md: "3rem" } }}>
           Looks like you've got lost...
         </Typography>
 
         <Button
           component={Link}
-          href="/dashboard"
+          href="/"
           variant="contained"
           size="large"
           sx={{
@@ -62,12 +63,13 @@ export default function NotFound() {
             borderRadius: 1,
             textTransform: "none",
             fontWeight: "bold",
-            fontSize: "1.1rem",
+            fontSize: { xs: "1rem", md: "1.1rem" },
             px: 4,
-            width: 400,
+            width: "100%",
+            maxWidth: 400,
           }}
         > 
-          Back Dashboard
+          Back to Home
         </Button>
       </Paper>
     </Box>

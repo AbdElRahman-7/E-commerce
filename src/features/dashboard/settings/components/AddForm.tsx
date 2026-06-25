@@ -20,7 +20,6 @@ export default function AddForm() {
         borderRadius: 3,
       }}
     >
-      {/* Profile Upload */}
       <Box sx={{ display: "flex", justifyContent: "center", mb: 5 }}>
         <Box sx={{ textAlign: "center" }}>
           <Avatar

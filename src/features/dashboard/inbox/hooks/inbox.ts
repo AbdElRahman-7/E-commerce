@@ -129,7 +129,6 @@ export function useInbox() {
   };
 
   return {
-    // state
     emails,
     labels,
     activeFolder,
@@ -139,7 +138,6 @@ export function useInbox() {
     newLabelName,
     newLabelColor,
     page,
-    // derived
     filteredEmails,
     pagedEmails,
     totalPages,
@@ -148,13 +146,11 @@ export function useInbox() {
     anyChecked,
     allPageChecked,
     somePageChecked,
-    // setters
     setSearchQuery,
     setPage,
     setAddLabelOpen,
     setNewLabelName,
     setNewLabelColor,
-    // actions
     folderCount,
     labelCount,
     toggleCheck,

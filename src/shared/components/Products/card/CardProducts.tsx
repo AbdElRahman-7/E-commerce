@@ -1,4 +1,4 @@
-"useclient";
+"use client";
 import { Box, Card, CardContent, IconButton, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
@@ -7,14 +7,18 @@ import { CardProductsProps } from "@/shared/types/card";
 import Link from "next/link";
 
 export const CardProducts = ({ product }: CardProductsProps) => {
+  const formattedPrice =
+    typeof product.price === "string"
+      ? product.price.replace(/^\$+/, "")
+      : String(product.price);
+
   return (
     <Link href={`/products/${product.id}`} passHref style={{ textDecoration: 'none' }}>
         <Card
     key={product.id}
       elevation={0}
       sx={{
-        minWidth: { xs: 220, sm: 260 },
-        maxWidth: { xs: 220, sm: 260 },
+        width: "100%",
         border: "none",
         borderRadius: 0,
         cursor: "pointer",
@@ -29,7 +33,7 @@ export const CardProducts = ({ product }: CardProductsProps) => {
           width: "100%",
           aspectRatio: "3 / 4",
           backgroundColor: "#EEEEF3",
-          borderRadius: "12px",
+          borderRadius: 0,
           overflow: "hidden",
         }}
       >
@@ -90,11 +94,11 @@ export const CardProducts = ({ product }: CardProductsProps) => {
         </Box>
 
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <Typography variant="body1" sx={{ fontWeight: 700, color: "#1A1A1A", fontSize: "14px" }}>
+          <Typography variant="body1" sx={{ fontWeight: 700, color: "#1A1A1A", fontSize: "12px" }}>
             {product.title}
           </Typography>
-          <Typography variant="body1" sx={{ fontWeight: 600, color: "#1A1A1A", fontSize: "14px" }}>
-            ${product.price}
+          <Typography variant="body1" sx={{ fontWeight: 600, color: "#1A1A1A", fontSize: "12px" }}>
+            ${formattedPrice}
           </Typography>
         </Box>
       </CardContent>

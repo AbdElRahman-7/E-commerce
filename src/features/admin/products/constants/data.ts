@@ -11,14 +11,14 @@ export const itemData = [
 
 export const Newproducts = [
   {
-    id: 1,
+    id: "embroidered-seersucker-shirt",
     title: "Embroidered Seersucker Shirt",
     categories: "V-Neck T-Shirt",
     price: "$99",
     img: "/home.jpg",
   },
   {
-    id: 2,
+    id: "basic-slim-fit-t-shirt",
     title: "Basic Slim Fit T-Shirt",
     categories: "Cotton T Shirt",
 
@@ -26,7 +26,7 @@ export const Newproducts = [
     img: "/home2.jpg",
   },
   {
-    id: 3,
+    id: "blurred-print-t-shirt",
     title: "Blurred Print T-Shirt",
     categories: "Henley T-Shirt",
 
@@ -34,7 +34,7 @@ export const Newproducts = [
     img: "/home.jpg",
   },
   {
-    id: 4,
+    id: "full-sleeve-zipper",
     title: "Full Sleeve Zipper",
     categories: "Crewneck T-Shirt",
 
@@ -42,7 +42,7 @@ export const Newproducts = [
     img: "/home2.jpg",
   },
   {
-    id: 5,
+    id: "fresh-salad-v-neck",
     title: "Fresh Salad",
     categories: "V-Neck T-Shirt",
 
@@ -53,7 +53,7 @@ export const Newproducts = [
 
 export const productsData = [
   {
-    id: 1,
+  id: "product-basic-slim-fit",
     type: "Cotton T Shirt",
     name: "Basic Slim Fit T-Shirt",
     category: "Cotton T Shirt",
@@ -63,7 +63,7 @@ export const productsData = [
     img: "/home.jpg",
   },
   {
-    id: 2,
+    id: "product-basic-heavy-weight",
     type: "Crewneck T-Shirt",
     name: "Basic Heavy Weight T-Shirt",
     category: "Cotton  jeans ",
@@ -74,7 +74,7 @@ export const productsData = [
     img: "/home2.jpg",
   },
   {
-    id: 3,
+    id: "product-full-sleeve-zipper",
     type: "Cotton T Shirt",
     name: "Full Sleeve Zipper",
     category: "Cotton T Shirt",
@@ -93,4 +93,23 @@ export const categories = [
   "T-SHIRTS",
   "JEANS",
   "JACKETS",
+];
+export const gallery =[
+    {
+    img: "/face1.jpg",
+    title: "white",
+  },
+  {
+    img: "/face2.jpg",
+    title: "black",
+  },
+    {
+    img: "/face3.jpg",
+    title: "white",
+  },
+  {
+    img: "/face4.jpg",
+    title: "black",
+  },
+  
 ];

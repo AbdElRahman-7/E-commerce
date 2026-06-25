@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/material";
-import {dashboardStats} from "../constants/dashboard-stats";
 
 import { TrendingUp, TrendingDown } from "lucide-react";
 
