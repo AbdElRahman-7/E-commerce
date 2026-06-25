@@ -23,7 +23,6 @@ import { logout as logoutAction } from "@/actions/auth";
 export default function Sidebar({ openSidebar, setOpenSidebar }: SidebarProps) {
   return (
     <>
-      {/* Mobile Sidebar */}
       <Drawer
         open={openSidebar}
         onClose={() => setOpenSidebar(false)}
@@ -33,15 +32,17 @@ export default function Sidebar({ openSidebar, setOpenSidebar }: SidebarProps) {
             xs: "block",
             md: "none",
           },
+          "& .MuiDrawer-paper": {
+            width: "min(82vw, 320px)",
+          },
         }}
       >
         <SidebarContent />
       </Drawer>
 
-      {/* Desktop Sidebar */}
       <Box
         sx={{
-          width: 260,
+          width: { md: 240, lg: 260 },
           minHeight: "100vh",
           borderRight: "1px solid #E5E7EB",
           backgroundColor: "#fff",
@@ -58,7 +59,6 @@ export default function Sidebar({ openSidebar, setOpenSidebar }: SidebarProps) {
 }
 
 function SidebarContent() {
-  {/*With the help of AI */}
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
@@ -72,11 +72,11 @@ function SidebarContent() {
   return (
     <Box
       sx={{
-        width: 260,
+        width: "100%",
+        maxWidth: 260,
         p: 2,
       }}
     >
-      {/* Logo */}
       <Typography
         variant="h5"
         sx={{
@@ -87,7 +87,6 @@ function SidebarContent() {
         DashStack
       </Typography>
 
-      {/* Main Menu */}
       <List>
         {mainMenu.map((item) => {
           const Icon = item.icon;
@@ -116,7 +115,6 @@ function SidebarContent() {
 
       <Divider sx={{ my: 3 }} />
 
-      {/* Pages */}
       <Typography
         variant="body2"
         sx={{
@@ -154,7 +152,6 @@ function SidebarContent() {
         })}
       </List>
 
-      {/* Settings */}
       <Box
         sx={{
           mt: 5,

@@ -9,6 +9,7 @@ import {
   CardMedia,
   CardContent,
 } from "@mui/material";
+import Link from "next/link";
 import SearchIcon from "@mui/icons-material/Search";
 import { productsData, categories } from "../constants/data";
 import { useProductsFilter } from "../hooks/useProductsFilter";
@@ -17,7 +18,7 @@ export default function ProductsAdmin() {
     useProductsFilter(productsData);
 
   return (
-    <Box sx={{ p: { xs: 2, md: 4 }, width: "100%" }}>
+    <Box sx={{ p: { xs: 1.5, sm: 2, md: 4 }, width: "100%", maxWidth: "100%" }}>
       <Typography
         variant="h5"
         sx={{
@@ -103,97 +104,102 @@ export default function ProductsAdmin() {
         <Grid container spacing={3}>
           {filteredProducts.map((product) => (
             <Grid size={{ xs: 12, sm: 6, md: 4 }} key={product.id}>
-              <Card
-                elevation={0}
-                sx={{
-                  backgroundColor: "transparent",
-                  borderRadius: 0,
-                  cursor: "pointer",
-                  "&:hover img": { transform: "scale(1.03)" },
-                }}
+              <Link
+                href={`/products/${product.id}`}
+                style={{ textDecoration: "none", color: "inherit", display: "block" }}
               >
-                <Box
+                <Card
+                  elevation={0}
                   sx={{
-                    overflow: "hidden",
-                    backgroundColor: "#F3F4F6",
-                    mb: 1.5,
+                    backgroundColor: "transparent",
+                    borderRadius: 0,
+                    cursor: "pointer",
+                    "&:hover img": { transform: "scale(1.03)" },
                   }}
                 >
-                  <CardMedia
-                    component="img"
-                    height="450"
-                    image={product.img}
-                    alt={product.name}
-                    sx={{
-                      objectFit: "cover",
-                      transition: "transform 0.3s ease",
-                    }}
-                  />
-                </Box>
-
-                <CardContent sx={{ p: "0 !important" }}>
                   <Box
                     sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 1,
-                      mb: 0.5,
+                      overflow: "hidden",
+                      backgroundColor: "#F3F4F6",
+                      mb: 1.5,
                     }}
                   >
-                    <Typography
+                    <CardMedia
+                      component="img"
+                      height="450"
+                      image={product.img}
+                      alt={product.name}
                       sx={{
-                        fontSize: "12px",
-                        color: "#6B7280",
-                        fontWeight: 500,
+                        objectFit: "cover",
+                        transition: "transform 0.3s ease",
+                      }}
+                    />
+                  </Box>
+
+                  <CardContent sx={{ p: "0 !important" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 1,
+                        mb: 0.5,
                       }}
                     >
-                      {product.type}
-                    </Typography>
-
-                    {product.colorCode && (
-                      <Box
-                        sx={{
-                          width: "12px",
-                          height: "12px",
-                          backgroundColor: product.colorCode,
-                          border: "1px solid #D1D5DB",
-                        }}
-                      />
-                    )}
-
-                    {(product.extraColors ?? 0) > 0 && (
                       <Typography
                         sx={{
-                          fontSize: "11px",
-                          color: "#9CA3AF",
-                          fontWeight: 600,
+                          fontSize: "12px",
+                          color: "#6B7280",
+                          fontWeight: 500,
                         }}
                       >
-                        +{product.extraColors}
+                        {product.type}
                       </Typography>
-                    )}
-                  </Box>
 
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Typography
-                      sx={{ fontSize: "15px", fontWeight: 800, color: "#111" }}
+                      {product.colorCode && (
+                        <Box
+                          sx={{
+                            width: "12px",
+                            height: "12px",
+                            backgroundColor: product.colorCode,
+                            border: "1px solid #D1D5DB",
+                          }}
+                        />
+                      )}
+
+                      {(product.extraColors ?? 0) > 0 && (
+                        <Typography
+                          sx={{
+                            fontSize: "11px",
+                            color: "#9CA3AF",
+                            fontWeight: 600,
+                          }}
+                        >
+                          +{product.extraColors}
+                        </Typography>
+                      )}
+                    </Box>
+
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
                     >
-                      {product.name}
-                    </Typography>
-                    <Typography
-                      sx={{ fontSize: "14px", fontWeight: 600, color: "#111" }}
-                    >
-                      $ {product.price}
-                    </Typography>
-                  </Box>
-                </CardContent>
-              </Card>
+                      <Typography
+                        sx={{ fontSize: "15px", fontWeight: 800, color: "#111" }}
+                      >
+                        {product.name}
+                      </Typography>
+                      <Typography
+                        sx={{ fontSize: "14px", fontWeight: 600, color: "#111" }}
+                      >
+                        $ {product.price}
+                      </Typography>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Link>
             </Grid>
           ))}
         </Grid>

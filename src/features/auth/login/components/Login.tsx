@@ -34,14 +34,14 @@ export const Login = () => {
       <Paper
         elevation={3}
         sx={{
-          p: 4,
+          p: { xs: 2, sm: 4 },
           borderRadius: 2,
           width: "100%",
           maxWidth: 500,
           bgcolor: "white",
         }}
       >
-        <Box sx={{ p: 2, mx: "auto" }}>
+        <Box sx={{ p: { xs: 1, sm: 2 }, mx: "auto" }}>
           <Typography
             variant="h5"
             component="h1"
@@ -120,7 +120,7 @@ export const Login = () => {
                 fullWidth
                 sx={{
                   mt: 2,
-                  maxWidth: 350,
+                  maxWidth: { xs: "100%", sm: 350 },
                   alignSelf: "center",
                   borderRadius: 1,
                 }}
@@ -135,7 +135,7 @@ export const Login = () => {
                   Don't have an Account?
                   <Link
                     component={NextLink}
-                    href="/auth/register"
+                    href="/register"
                     underline="hover"
                     sx={{ fontWeight: "bold", color: "primary.main" }}
                   >

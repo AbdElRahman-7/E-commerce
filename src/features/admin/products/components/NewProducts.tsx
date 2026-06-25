@@ -8,15 +8,6 @@ import { Newproducts } from "../constants/data";
 import Link from "next/link";
 import { CardProducts } from "@/shared/components/Products/card/CardProducts";
 
-type NewProduct = {
-  id: number;
-  title: string;
-  categories: string;
-  price: string;
-  img: string;
-  variants?: number;
-};
-
 export default function NewProducts() {
   const sliderRef = React.useRef<HTMLDivElement>(null);
 
@@ -29,20 +20,42 @@ export default function NewProducts() {
   };
 
   return (
-    <Box sx={{ width: "100%", my: 7 }}>
+    <Box
+      sx={{
+        width: "100%",
+        mx: 0,
+        my: { xs: 5, md: 7 },
+        px: { xs: 1, sm: 2, md: 0 },
+      }}
+    >
       <Box
         sx={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
           mb: 3,
-          px: 1,
         }}
       >
-        <Typography variant="h5" sx={{ fontWeight: 600, color: "#1A1A1A" }}>
+        <Typography
+          variant="h5"
+          sx={{
+            fontWeight: 800,
+            color: "#1A1A1A",
+            lineHeight: 0.95,
+            letterSpacing: "-0.5px",
+          }}
+        >
           NEW THIS WEEK{" "}
-          <sup style={{ color: "#000e8a", fontSize: "14px" }}>(50)</sup>
+          <sup
+            style={{
+              color: "#000e8a",
+              fontSize: "14px",
+            }}
+          >
+            (50)
+          </sup>
         </Typography>
+
         <Link href="/products">
           <Button
             variant="text"
@@ -51,7 +64,10 @@ export default function NewProducts() {
               color: "#222",
               fontWeight: 600,
               textTransform: "none",
-              "&:hover": { backgroundColor: "transparent", color: "#000" },
+              "&:hover": {
+                backgroundColor: "transparent",
+                color: "#000",
+              },
             }}
           >
             See All
@@ -62,39 +78,58 @@ export default function NewProducts() {
       <Box
         ref={sliderRef}
         sx={{
-          display: "flex",
+          display: "grid",
+          gridAutoFlow: "column",
+          gridAutoColumns: {
+            xs: "78vw",
+            sm: "280px",
+            md: "calc((100% - 72px) / 4)",
+          },
           gap: 3,
           overflowX: "auto",
           pb: 2,
-          px: 1,
           scrollBehavior: "smooth",
-          "&::-webkit-scrollbar": { display: "none" },
+          "&::-webkit-scrollbar": {
+            display: "none",
+          },
         }}
       >
-        {(Newproducts as NewProduct[]).map((newproduct) => (
+        {Newproducts.map((newproduct) => (
           <CardProducts key={newproduct.id} product={newproduct} />
         ))}
       </Box>
 
-      <Box sx={{ display: "flex", justifyContent: "center", gap: 1, mt: 3 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          gap: 1,
+          mt: 2.5,
+        }}
+      >
         <IconButton
           onClick={() => scroll("left")}
           sx={{
             border: "1px solid #E5E7EB",
             borderRadius: 0,
             color: "#000",
-            "&:hover": { backgroundColor: "#F3F4F6" },
+            "&:hover": {
+              backgroundColor: "#F3F4F6",
+            },
           }}
         >
           <ArrowBackIosNewIcon fontSize="small" />
         </IconButton>
+
         <IconButton
           onClick={() => scroll("right")}
           sx={{
             border: "1px solid #E5E7EB",
             borderRadius: 0,
             color: "#000",
-            "&:hover": { backgroundColor: "#F3F4F6" },
+            "&:hover": {
+              backgroundColor: "#F3F4F6",
+            },
           }}
         >
           <ArrowForwardIosIcon fontSize="small" />

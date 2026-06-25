@@ -1,9 +1,10 @@
 "use client";
 
 import * as React from "react";
+import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../../store";
-import { removeFromCart, updateQuantity } from "../../../../store/cartSlice"; // استيراد الأوامر
+import { removeFromCart, updateQuantity } from "../../../../store/cartSlice";
 import {
   Box,
   Typography,
@@ -22,6 +23,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 
 export default function CartPage() {
+  const router = useRouter();
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
 
@@ -33,7 +35,7 @@ export default function CartPage() {
   const total = subtotal + shippingCost;
 
   return (
-    <Box sx={{ p: { xs: 2, md: 5 }, maxWidth: "1200px", margin: "0 auto" }}>
+    <Box sx={{ p: { xs: 1.5, sm: 2, md: 5 }, maxWidth: "1200px", margin: "0 auto", width: "100%" }}>
       <Box sx={{ display: "flex", alignItems: "center", gap: 4, mb: 2 }}>
         <Typography
           sx={{
@@ -343,6 +345,7 @@ export default function CartPage() {
             <Button
               fullWidth
               disabled={cartItems.length === 0}
+              onClick={() => router.push("/checkout")}
               sx={{
                 backgroundColor: cartItems.length === 0 ? "#E5E7EB" : "#111",
                 color: cartItems.length === 0 ? "#9CA3AF" : "#fff",

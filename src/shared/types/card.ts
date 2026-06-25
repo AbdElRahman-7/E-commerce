@@ -1,6 +1,6 @@
 export interface CardProductsProps {
   product: {
-    id: number;
+    id: string | number;
     img: string;
     title: string;
     categories?: string;

@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 
 export default function ProductDescription() {
   return (
-    <Box sx={{ mb: 8 }}>
+    <Box sx={{ mb: 8, px: { xs: 2, sm: 4, md: 0 } }}>
       <Typography
         component="h2"
         sx={{

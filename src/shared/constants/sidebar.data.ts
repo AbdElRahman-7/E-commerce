@@ -102,7 +102,7 @@ export const settingsItems: SidebarItem[] = [
   },
   {
     title: "Logout",
-    href: "/auth/login",
+    href: "/login",
     icon: LogOut,
   },
 ];

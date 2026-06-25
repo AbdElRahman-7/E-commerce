@@ -1,6 +1,6 @@
 export const collections = [
   {
-    id: 1,
+    id: "breakfast-special",
     title: "Breakfast Special",
     price: "15",
     img: "/home2.jpg",
@@ -8,7 +8,7 @@ export const collections = [
     variants: 3,
   },
   {
-    id: 2,
+    id: "classic-burger",
     title: "Classic Burger",
     price: "12",
     img: "/home.jpg",
@@ -16,7 +16,7 @@ export const collections = [
     variants: 5,
   },
   {
-    id: 3,
+    id: "french-pancakes",
     title: "French Pancakes",
     price: "10",
     img: "/home2.jpg",
@@ -24,7 +24,7 @@ export const collections = [
     variants: 2,
   },
   {
-    id: 4,
+    id: "crispy-pizza",
     title: "Crispy Pizza",
     price: "18",
     img: "/home.jpg",
@@ -32,7 +32,7 @@ export const collections = [
     variants: 4,
   },
   {
-    id: 5,
+    id: "fresh-salad-healthy",
     title: "Fresh Salad",
     price: "9",
     img: "/home2.jpg",

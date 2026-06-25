@@ -2,7 +2,6 @@
 import { Paper } from "@mui/material";
 import { Filter } from "lucide-react";
 import DataFilter from "./DataFilter";
-import TypeFilter from "./TypeFilter";
 import { StatusFilter } from "./StatusFilter";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
@@ -19,8 +18,6 @@ type Props = {
 export default function OrderFilters({
   statusFilter,
   setStatusFilter,
-  typeFilter = [],
-  setTypeFilter,
   dateFilter,
   setDateFilter,
   resetFilters,
@@ -38,7 +35,6 @@ export default function OrderFilters({
         width: "fit-content",
       }}
     >
-      {/* Filter Icon */}
       <div
         style={{
           width: 50,
@@ -60,7 +56,6 @@ export default function OrderFilters({
           borderRadius: 1,
         }}
       >
-        {/* Date Filter */}
         <DataFilter dateFilter={dateFilter} setDateFilter={setDateFilter} />
 
         <div
@@ -72,9 +67,6 @@ export default function OrderFilters({
           }}
         />
 
-        {/* Order Type Filter */}
-        <TypeFilter typeFilter={typeFilter} setTypeFilter={setTypeFilter} />
-
         <div
           style={{
             width: 1,
@@ -84,12 +76,10 @@ export default function OrderFilters({
           }}
         />
 
-        {/* Status Filter */}
-        <StatusFilter
+          <StatusFilter
           statusFilter={statusFilter}
           setStatusFilter={setStatusFilter}
         />
-        {/* Reset Filter */}
 
         <div
           style={{

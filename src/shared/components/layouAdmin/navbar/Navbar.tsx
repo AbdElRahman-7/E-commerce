@@ -16,6 +16,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 
 type NavbarProps = {
   setOpenSidebar: React.Dispatch<React.SetStateAction<boolean>>;
@@ -40,9 +41,41 @@ const CenterLogo = () => (
   </svg>
 );
 
+const BackArrowIcon = () => (
+  <svg
+    width="47.5"
+    height="12"
+    viewBox="0 0 92 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <path
+      d="M2 12H88"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+    />
+    <path d="M2 12L10 4" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+    <path d="M2 12L10 20" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+  </svg>
+);
+
 export default function Navbar({ setOpenSidebar }: NavbarProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
   const [profileMenuAnchor, setProfileMenuAnchor] =
     useState<null | HTMLElement>(null);
+
+  const handleBack = () => {
+    if (window.history.length > 1) {
+      router.back();
+      return;
+    }
+
+    router.push("/");
+  };
 
   return (
     <AppBar
@@ -63,11 +96,41 @@ export default function Navbar({ setOpenSidebar }: NavbarProps) {
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center", gap: 3, flex: 1 }}>
+          {!isHomePage && (
+            <IconButton
+              onClick={handleBack}
+              edge="start"
+              aria-label="Go back"
+              sx={{
+                display: { xs: "inline-flex", md: "none" },
+                color: "#060607",
+                borderRadius: 0,
+                width: "auto",
+                height: "auto",
+                p: 0,
+                mr: 0.5,
+                ml: 0.5,
+                alignSelf: "flex-start",
+                "&:hover": {
+                  backgroundColor: "transparent",
+                },
+              }}
+            >
+              <BackArrowIcon />
+            </IconButton>
+          )}
+
           <IconButton
             onClick={() => setOpenSidebar((prev) => !prev)}
             edge="start"
             aria-label="Toggle sidebar"
-            sx={{ color: "#000" }}
+            sx={{
+              color: "#000",
+              display: {
+                xs: isHomePage ? "inline-flex" : "none",
+                md: "inline-flex",
+              },
+            }}
           >
             <MenuIcon />
           </IconButton>
@@ -127,8 +190,8 @@ export default function Navbar({ setOpenSidebar }: NavbarProps) {
             sx={{
               backgroundColor: "#222222",
               color: "#fff",
-              width: 44,
-              height: 44,
+              width: { xs: 38, sm: 44 },
+              height: { xs: 38, sm: 44 },
               "&:hover": { backgroundColor: "#000" },
             }}
           >
@@ -152,15 +215,15 @@ export default function Navbar({ setOpenSidebar }: NavbarProps) {
             }}
           >
             <Typography
-              sx={{ color: "#fff", fontSize: "14px", fontWeight: 500 }}
+              sx={{ color: "#fff", fontSize: "14px", fontWeight: 500, display: { xs: "none", sm: "block" } }}
             >
               Cart
             </Typography>
 
             <Box
               sx={{
-                width: 36,
-                height: 36,
+                width: { xs: 30, sm: 36 },
+                height: { xs: 30, sm: 36 },
                 backgroundColor: "#fff",
                 borderRadius: "50%",
                 display: "flex",
@@ -183,8 +246,8 @@ export default function Navbar({ setOpenSidebar }: NavbarProps) {
             sx={{
               backgroundColor: "#222222",
               color: "#fff",
-              width: 44,
-              height: 44,
+              width: { xs: 38, sm: 44 },
+              height: { xs: 38, sm: 44 },
               "&:hover": { backgroundColor: "#000" },
             }}
           >

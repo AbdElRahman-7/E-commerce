@@ -116,7 +116,6 @@ export default function HeroSlider() {
         </Button>
       </Box>
 
-      {/* Right Arrow */}
       <IconButton
         onClick={nextSlide}
         sx={{

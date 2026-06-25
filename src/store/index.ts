@@ -1,4 +1,3 @@
-// store/index.ts
 import { configureStore } from "@reduxjs/toolkit";
 import wishlistReducer from "./wishlistSlice";
 import cartReducer from "./cartSlice";
